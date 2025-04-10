@@ -1,8 +1,8 @@
 import Foundation
 
 public class FDateTime {
-    let _ticksMask: Int128 = 0x3FFFFFFFFFFFFFFF
-    let _flagsMask: Int128 = 0xC000000000000000
+    let _ticksMask: Int64 = Int64(bitPattern: 0x3FFFFFFFFFFFFFFF)
+    let _flagsMask: Int64 = Int64(bitPattern: 0xC000000000000000)
     let _ticksPerMillisecond: Int = 10000
     var _ticksPerSecond: Int { return _ticksPerMillisecond * 1000 }
     var _ticksPerMinute: Int { return _ticksPerSecond * 60 }
@@ -33,7 +33,7 @@ public class FDateTime {
     let _datePartMonth: Int = 2
     let _datePartDay: Int = 3
 
-    private var _dateData: Int128 = 0
+    private var _dateData: Int64 = 0
     private var _localize: FLocalize = FLocalize.KOREA
     var internalTicks: Int { return Int(_dateData & _ticksMask) }
     var internalKind: Int { return Int(_dateData & _flagsMask) }
@@ -155,10 +155,10 @@ public class FDateTime {
     func setThis(_ data: Int) -> FDateTime {
         let timeZone = TimeZone.current
         let timeZoneOffset = timeZone.secondsFromGMT() / 60 / 60
-        _dateData = Int128(data * _ticksPerMillisecond) + dateToTicks(1970, 1, 1) + Int128(timeZoneOffset * _ticksPerHour)
+        _dateData = Int64(data * _ticksPerMillisecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
         return self
     }
-    func setThis(_ data: Int128) -> FDateTime {
+    func setThis(_ data: Int64) -> FDateTime {
         _dateData = data
         return self
     }
@@ -175,7 +175,7 @@ public class FDateTime {
         return self
     }
 
-    func dateToTicks(_ year: Int, _ month: Int, _ day: Int) -> Int128 {
+    func dateToTicks(_ year: Int, _ month: Int, _ day: Int) -> Int64 {
         if (year < 1 || year > 9999 || month < 1 || month > 12 || day < 1) {
             FException.FAssert.notDefined("illegal format year : \(year), month : \(month), day : \(day)")
         }
@@ -185,7 +185,7 @@ public class FDateTime {
             FException.FAssert.notDefined("illegal format year : \(year), month : \(month), day : \(day)")
         }
 
-        return Int128(daysToYear(year) + days[month - 1] + day - 1) * Int128(_ticksPerDay)
+        return Int64(daysToYear(year) + days[month - 1] + day - 1) * Int64(_ticksPerDay)
     }
     func toString(_ format: String) -> String {
         return FDateTimeFormat.ins.format(self, format, _localize)
@@ -254,7 +254,7 @@ public class FDateTime {
             day = days
         }
         
-        return FDateTime().setThis(Int128((dateToTicks(year, month, day) + Int128(internalTicks % _ticksPerDay)) | Int128(internalKind)))
+        return FDateTime().setThis(Int64((dateToTicks(year, month, day) + Int64(internalTicks % _ticksPerDay)) | Int64(internalKind)))
     }
     func addMinutes(_ value: Double) -> FDateTime {
         return add(value, _millisPerMinute)
