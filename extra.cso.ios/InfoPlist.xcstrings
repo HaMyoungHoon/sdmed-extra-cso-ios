@@ -1,0 +1,57 @@
+{
+  "sourceLanguage" : "ko",
+  "strings" : {
+      "app_name" : {
+          "extractionState" : "manual",
+          "localizations" : {
+              "en" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "SD Medical CSO"
+                  }
+              },
+              "ko" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "에스디 메디컬 CSO"
+                  }
+              }
+          }
+      },
+      "CFBundleDisplayName" : {
+          "comment" : "Bundle display name",
+          "localizations" : {
+              "en" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "SD Medical CSO"
+                  }
+              },
+              "ko" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "에스디 메디컬 CSO"
+                  }
+              }
+          }
+      },
+      "CFBundleName" : {
+          "comment" : "Bundle name",
+          "localizations" : {
+              "en" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "extra.cso.ios"
+                  }
+              },
+              "ko" : {
+                  "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "extra.cso.ios"
+                  }
+              }
+          }
+      }
+  },
+  "version" : "1.0"
+}
