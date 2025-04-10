@@ -1,5 +1,6 @@
 {
   "sourceLanguage" : "ko",
+  "sourceLanguage" : "en",
   "strings" : {
     "add_desc" : {
       "extractionState" : "manual",
