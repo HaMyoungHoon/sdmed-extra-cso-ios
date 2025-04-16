@@ -1,3 +1,5 @@
+import SwiftUI
+
 public enum FDayOfWeek: Int {
     case NULL = -1
     case SUNDAY = 0
@@ -8,6 +10,18 @@ public enum FDayOfWeek: Int {
     case FRIDAY = 5
     case SATURDAY = 6
 
+    func parseColor() -> Color {
+        switch self {
+        case FDayOfWeek.NULL: FAppColor.foreground
+        case FDayOfWeek.SUNDAY: FAppColor.sunday
+        case FDayOfWeek.MONDAY: FAppColor.monday
+        case FDayOfWeek.TUESDAY: FAppColor.tuesday
+        case FDayOfWeek.WEDNESDAY: FAppColor.wednesday
+        case FDayOfWeek.THURSDAY: FAppColor.thursday
+        case FDayOfWeek.FRIDAY: FAppColor.friday
+        case FDayOfWeek.SATURDAY: FAppColor.saturday
+        }
+    }
     static func fromInt(_ value: Int) -> FDayOfWeek {
         return FDayOfWeek(rawValue: value) ?? SUNDAY
     }

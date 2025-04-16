@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		285E5274D7F90B3F9741A17D /* Pods_extra_cso_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_extra_cso_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8456D3B17E23A10E40595C80 /* Pods-extra.cso.ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extra.cso.ios.release.xcconfig"; path = "Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios.release.xcconfig"; sourceTree = "<group>"; };
 		F0C16A292D97C12F008B3297 /* extra.cso.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = extra.cso.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F71FB4C36FEEB891EAAF0A0D /* Pods-extra.cso.ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extra.cso.ios.debug.xcconfig"; path = "Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,17 +30,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				285E5274D7F90B3F9741A17D /* Pods_extra_cso_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CB0361DFFF8BB8511FCEB3B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F71FB4C36FEEB891EAAF0A0D /* Pods-extra.cso.ios.debug.xcconfig */,
+				8456D3B17E23A10E40595C80 /* Pods-extra.cso.ios.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F082108F2DADD6DC00D77559 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F0C16A202D97C12F008B3297 = {
 			isa = PBXGroup;
 			children = (
 				F0C16A2B2D97C12F008B3297 /* extra.cso.ios */,
+				F082108F2DADD6DC00D77559 /* Frameworks */,
 				F0C16A2A2D97C12F008B3297 /* Products */,
+				5CB0361DFFF8BB8511FCEB3B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,9 +79,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0C16A382D97C130008B3297 /* Build configuration list for PBXNativeTarget "extra.cso.ios" */;
 			buildPhases = (
+				34713ED4A94A02F61626D251 /* [CP] Check Pods Manifest.lock */,
 				F0C16A252D97C12F008B3297 /* Sources */,
 				F0C16A262D97C12F008B3297 /* Frameworks */,
 				F0C16A272D97C12F008B3297 /* Resources */,
+				803474ABC75397B559199B8F /* [CP] Copy Pods Resources */,
+				78ACDF9AB3770A9376C47360 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -64,8 +94,6 @@
 				F0C16A2B2D97C12F008B3297 /* extra.cso.ios */,
 			);
 			name = extra.cso.ios;
-			packageProductDependencies = (
-			);
 			productName = extra.cso.ios;
 			productReference = F0C16A292D97C12F008B3297 /* extra.cso.ios.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +142,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34713ED4A94A02F61626D251 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-extra.cso.ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78ACDF9AB3770A9376C47360 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		803474ABC75397B559199B8F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F0C16A252D97C12F008B3297 /* Sources */ = {
@@ -244,6 +331,7 @@
 		};
 		F0C16A392D97C130008B3297 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F71FB4C36FEEB891EAAF0A0D /* Pods-extra.cso.ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -253,6 +341,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"extra.cso.ios/Preview Content\"";
 				DEVELOPMENT_TEAM = UP5QMHP8AR;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -266,9 +355,15 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sdmed.extra-cso-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -278,12 +373,15 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 2.2;
+				TVOS_DEPLOYMENT_TARGET = "";
+				WATCHOS_DEPLOYMENT_TARGET = "";
+				XROS_DEPLOYMENT_TARGET = "";
 			};
 			name = Debug;
 		};
 		F0C16A3A2D97C130008B3297 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8456D3B17E23A10E40595C80 /* Pods-extra.cso.ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -293,6 +391,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"extra.cso.ios/Preview Content\"";
 				DEVELOPMENT_TEAM = UP5QMHP8AR;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -306,9 +405,15 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "sdmed.extra-cso-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -318,7 +423,9 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 2.2;
+				TVOS_DEPLOYMENT_TARGET = "";
+				WATCHOS_DEPLOYMENT_TARGET = "";
+				XROS_DEPLOYMENT_TARGET = "";
 			};
 			name = Release;
 		};

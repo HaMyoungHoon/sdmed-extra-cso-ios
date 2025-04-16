@@ -152,17 +152,23 @@ public class FDateTime {
         self._dateData = dateToTicks(year, month, day)
         return self
     }
+    func setThis(_ data: TimeInterval) -> FDateTime {
+        let timeZone = TimeZone.current
+        let timeZoneOffset = timeZone.secondsFromGMT() / 60 / 60
+        _dateData = Int64(data.toInt * _ticksPerSecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
+        return self
+    }
     func setThis(_ data: Int) -> FDateTime {
         let timeZone = TimeZone.current
         let timeZoneOffset = timeZone.secondsFromGMT() / 60 / 60
-        _dateData = Int64(data * _ticksPerMillisecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
+        _dateData = Int64(data * _ticksPerSecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
         return self
     }
     func setThis(_ data: Int64) -> FDateTime {
         _dateData = data
         return self
     }
-    func setThis(_ data: String?, localize: FLocalize = FLocalize.KOREA) -> FDateTime {
+    func setThis(_ data: String?, _ localize: FLocalize = FLocalize.KOREA) -> FDateTime {
         guard let dataBuff = data else {
             return self
         }

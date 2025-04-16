@@ -5,7 +5,7 @@ open class FLocalize {
     static let KOREA_LUNA = FLocalize()
     static let USA = FLocalize()
     
-    func parseThis(_ lang: String) -> FLocalize {
+    static func parseThis(_ lang: String) -> FLocalize {
         switch lang {
         case "en": return FLocalize.USA
             default : return FLocalize.KOREA

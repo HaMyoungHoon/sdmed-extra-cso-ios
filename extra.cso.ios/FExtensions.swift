@@ -1,5 +1,46 @@
+import Foundation
+
 class FExtensions {
     static let ins = FExtensions()
+    
+    func restTry<T>(_ fn: @escaping () async throws -> RestResultT<T>) async -> RestResultT<T> {
+        do {
+            return try await fn()
+        } catch {
+            return FDataExceptionHandler.handleException<T>(error)
+        }
+    }
+    func restTry(_ fn: @escaping () async throws -> RestResult) async -> RestResult {
+        do {
+            return try await fn()
+        } catch {
+            return FDataExceptionHandler.handleException(error)
+        }
+    }
+    
+    func getLocalize() -> FLocalize {
+        return FLocalize.parseThis(Locale.current.language.languageCode?.identifier ?? "")
+    }
+    func getToday() -> FDateTime {
+        return FDateTime().setLocalize(getLocalize()).setThis(Date().timeIntervalSince1970)
+    }
+    func getDurationToTime(_ duration: Int) -> String {
+        let buff = duration / 100
+        if buff < 0 {
+            return ""
+        }
+        if buff == 0 {
+            return "0:00"
+        }
+        let hours = buff / 3600
+        let minutes = (buff % 3600) / 60
+        let seconds = buff % 60
+        if hours > 0 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
+    }
 }
 
 
@@ -43,6 +84,25 @@ extension String {
     mutating func replace(_ old: String, _ new: String) -> String {
         return self.replacingOccurrences(of: old, with: new)
     }
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = self.data(using: .utf8) else {
+            return nil
+        }
+        do {
+            return try NSAttributedString(data: data,
+                                          options: [
+                                            .documentType: NSAttributedString.DocumentType.html,
+                                            .characterEncoding: String.Encoding.utf8.rawValue
+                                          ],
+                                          documentAttributes: nil
+            )
+        } catch {
+            return nil
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
 }
 
 extension Substring {
@@ -50,7 +110,19 @@ extension Substring {
         return String(self)
     }
     var toInt: Int {
-        return Int(self.toString)!
+        guard let ret = Int(self.toString) else {
+            return 0
+        }
+        return ret
+    }
+}
+
+extension Bool {
+    var toString: String {
+        return String(self)
+    }
+    var toInt: Int {
+        return self ? 1 : 0
     }
 }
 
@@ -89,5 +161,11 @@ extension Double {
     }
     var toInt: Int {
         return Int(self)
+    }
+}
+
+extension Array: PDefaultInitializable {
+    public init() {
+        self = []
     }
 }
