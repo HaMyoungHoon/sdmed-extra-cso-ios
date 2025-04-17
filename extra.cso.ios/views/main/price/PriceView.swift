@@ -1,10 +1,19 @@
 import SwiftUI
 
-struct PriceView: View {
-    @StateObject var dataContext: PriceViewVM = PriceViewVM()
+struct PriceView: FBaseView {
+    @StateObject var dataContext: PriceViewVM
+    init(_ appState: FAppState) {
+        _dataContext = StateObject(wrappedValue: PriceViewVM(appState))
+    }
     var body: some View {
         VStack {
             Text(dataContext.label)
-        }.padding()
+        }.onAppear {
+            dataContext.addEventListener(self)
+        }
+    }
+    
+    func onEvent(_ data: Any?) async {
+        
     }
 }

@@ -1,4 +1,4 @@
-class VersionModel {
+class VersionModel: Comparable {
     var major: Int = 0
     var minor: Int = 0
     var patch: Int = 0
@@ -29,5 +29,20 @@ class VersionModel {
         minor = buff[1].toInt
         patch = buff[2].toInt
         return self
+    }
+    
+    static func < (lhs: VersionModel, rhs: VersionModel) -> Bool {
+        if lhs.major != rhs.major {
+            return lhs.major < rhs.major
+        }
+        if lhs.minor != rhs.minor {
+            return lhs.minor < rhs.minor
+        }
+        return lhs.patch < rhs.patch
+    }
+    static func == (lhs: VersionModel, rhs: VersionModel) -> Bool {
+        return lhs.major == rhs.major &&
+               lhs.minor == rhs.minor &&
+               lhs.patch == rhs.patch
     }
 }

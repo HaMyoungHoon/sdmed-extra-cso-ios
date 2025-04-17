@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum EDIState: String, Codable {
+enum EDIState: String, Codable, CaseIterable {
     case None
     case OK
     case Reject

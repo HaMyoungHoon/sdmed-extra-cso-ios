@@ -1,4 +1,4 @@
-enum UserFileType: String, Decodable {
+enum UserFileType: String, Decodable, CaseIterable {
     case Taxpayer
     case BankAccount
     case CsoReport

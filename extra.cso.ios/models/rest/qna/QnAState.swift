@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum QnAState: String, Decodable {
+enum QnAState: String, Decodable, CaseIterable {
     case None
     case OK
     case Recep

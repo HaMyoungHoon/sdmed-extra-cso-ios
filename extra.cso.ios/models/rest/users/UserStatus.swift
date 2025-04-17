@@ -1,4 +1,4 @@
-enum UserStatus: String, Decodable {
+enum UserStatus: String, Decodable, CaseIterable {
     case None
     case Live
     case Stop

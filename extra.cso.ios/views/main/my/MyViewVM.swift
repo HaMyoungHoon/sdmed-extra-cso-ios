@@ -1,4 +1,4 @@
 import Foundation
-class MyViewVM: ObservableObject {
+class MyViewVM: FBaseViewModel {
     @Published var label: String = "My"
 }

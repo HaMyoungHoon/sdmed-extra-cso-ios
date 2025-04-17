@@ -56,11 +56,58 @@ class FStorage {
     static func getAuthToken() -> String {
         return getString(FConstants.AUTH_TOKEN)
     }
-    static func putAuthToken(_ token: String) {
+    static func setAuthToken(_ token: String?) {
+        guard let token = token else {
+            return
+        }
         putString(FConstants.AUTH_TOKEN, token)
     }
     static func removeAuthToken() {
         delete(FConstants.AUTH_TOKEN)
+    }
+    static func getMultiLoginData() -> [UserMultiLoginModel]? {
+        return getList(FConstants.MULTI_LOGIN_TOKEN)
+    }
+    static func setMultiLoginData(_ data: [UserMultiLoginModel]) {
+        putList(FConstants.MULTI_LOGIN_TOKEN, data)
+    }
+    static func logoutMultiLoginData() {
+        guard let item = getMultiLoginData() else {
+            return
+        }
+        item.forEach { $0.isLogin = false }
+        removeMultiLoginData()
+        setMultiLoginData(item)
+    }
+    static func addMultiLoginData(_ data: UserMultiLoginModel?) {
+        guard let data = data else {
+            return
+        }
+        let pastData = getMultiLoginData() ?? []
+        var seen = Set<UserMultiLoginModel>()
+        var ret: [UserMultiLoginModel] = pastData.filter { seen.insert($0).inserted }
+        ret.forEach { $0.isLogin = false }
+        if let findBuff = ret.first(where: { $0.thisPK == data.thisPK }) {
+            _ = findBuff.safeCopy(data)
+        } else {
+            ret.append(data)
+        }
+        removeMultiLoginData()
+        setMultiLoginData(ret)
+    }
+    static func delMultiLoginData(_ data: UserMultiLoginModel?) {
+        guard let data = data else {
+            return
+        }
+        let pastData = getMultiLoginData() ?? []
+        var seen = Set<UserMultiLoginModel>()
+        var ret: [UserMultiLoginModel] = pastData.filter { seen.insert($0).inserted }
+        ret.removeAll { $0.thisPK == data.thisPK }
+        removeMultiLoginData()
+        setMultiLoginData(ret)
+    }
+    static func removeMultiLoginData() {
+        delete(FConstants.MULTI_LOGIN_TOKEN)
     }
     
     static func getString(_ key: String, _ defValue: String = "") -> String {

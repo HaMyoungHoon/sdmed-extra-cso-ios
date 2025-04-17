@@ -1,4 +1,4 @@
-enum HospitalTempFileType: String, Decodable {
+enum HospitalTempFileType: String, Decodable, CaseIterable {
     case TAXPAYER
     
     var desc: String {

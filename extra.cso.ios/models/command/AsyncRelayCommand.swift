@@ -8,24 +8,24 @@ class AsyncRelayCommand: PCommand {
         return _isEnabled.get()
     }
     var asyncEvent: PAsyncEventListener? = nil
-    let _execute: (Any?) async -> Void
-    let _canExecute: ((Any?) -> Bool)?
+    let execute: (Any?) async -> Void
+    let canExecute: ((Any?) -> Bool)?
     init(_ execute: @escaping (Any?) async -> Void, _ canExecute: ((Any?) -> Bool)? = nil) {
         _isEnabled.set(true)
-        _execute = execute
-        _canExecute = canExecute
+        self.execute = execute
+        self.canExecute = canExecute
         _ = isSafe()
     }
     func execute(_ params: Any?) {
         if !isSafe() {
             return
         }
-        if _canExecute?(params) != true && !getEnable() {
+        if canExecute?(params) != true && !getEnable() {
             return
         }
         setEnable(false)
         Task {
-            await _execute(params)
+            await execute(params)
             await asyncEvent?.onEvent(params)
             setEnable(true)
         }
@@ -44,7 +44,7 @@ class AsyncRelayCommand: PCommand {
     }
     private func isSafe() -> Bool {
         let currentTime = Int(Date().timeIntervalSince1970)
-        if currentTime - _lastClickedTime > clickIntervalMillis {
+        if (currentTime - _lastClickedTime) * 1000 > clickIntervalMillis {
             _lastClickedTime = currentTime
             return true
         }

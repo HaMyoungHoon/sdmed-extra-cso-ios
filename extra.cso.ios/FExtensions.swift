@@ -43,7 +43,6 @@ class FExtensions {
     }
 }
 
-
 extension String {
     subscript (_ index: Int) -> Character {
         let charIndex = self.index(self.startIndex, offsetBy: index)

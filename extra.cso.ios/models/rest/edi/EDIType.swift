@@ -1,4 +1,4 @@
-enum EDIType: String, Codable {
+enum EDIType: String, Codable, CaseIterable {
     case DEFAULT
     case NEW
     case TRANSFER

@@ -1,4 +1,4 @@
-enum VersionCheckType: String, Decodable {
+enum VersionCheckType: String, Decodable, CaseIterable {
     case PC
     case AOS
     case IOS

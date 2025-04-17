@@ -1,32 +1,71 @@
-//
-//  ContentView.swift
-//  extra.cso.ios
-//
-//  Created by 하명훈 on 3/29/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    @State private var path = NavigationPath()
+    @StateObject var appState = FAppState()
     var body: some View {
-        TabView {
-            EDIView().tabItem {
-                Label("menu_edi_desc", systemImage: "list.bullet.rectangle.portrait")
+        ZStack {
+            loadingView
+            updateView
+            toastView
+            contentView().environmentObject(appState)
+        }
+    }
+    var loadingView: some View {
+        ZStack {
+            if appState.isLoading {
+                Color.black.opacity(0.1)
+                    .edgesIgnoringSafeArea(.all)
+                    .zIndex(99)
+                ProgressView()
+                    .tint(FAppColor.accent)
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(2.0)
+                    .zIndex(100)
             }
-            PriceView().tabItem {
-                Label("menu_price_desc", systemImage: "wonsign.circle")
+        }.zIndex(100)
+    }
+    var toastView: some View {
+        VStack {
+            if let toast = appState.toastMessage {
+                Text(toast)
+                    .padding()
+                    .background(Color.black.opacity(0.8))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.top, 5)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                appState.toast()
+                            }
+                        }
+                    }
+                Spacer()
             }
-            HomeView().tabItem {
-                Label("menu_home_desc", systemImage: "square.and.arrow.up.badge.clock")
+        }
+        .zIndex(200)
+    }
+    var updateView: some View {
+        VStack {
+            if appState.updateVisible {
+                Text("new_version_update_desc")
+                HStack {
+                    Text("update_desc")
+                }
             }
-            QnAView().tabItem {
-                Label("menu_qna_desc", systemImage: "questionmark.bubble")
-            }
-            MyView().tabItem {
-                Label("menu_my_desc", systemImage: "person")
-            }
-            
+        }.zIndex(101)
+    }
+    
+    @ViewBuilder
+    private func contentView() -> some View {
+        switch appState.launchState {
+        case LaunchState.None:
+            LandingView(appState)
+        case LaunchState.Launching:
+            LandingView(appState)
+        case LaunchState.Authenticated:
+            MainView()
         }
     }
 }

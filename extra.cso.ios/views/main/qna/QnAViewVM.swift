@@ -1,4 +1,4 @@
 import Foundation
-class QnAViewVM: ObservableObject {
+class QnAViewVM: FBaseViewModel {
     @Published var label: String = "QNA"
 }

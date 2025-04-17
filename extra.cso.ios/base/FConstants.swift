@@ -1,5 +1,9 @@
 class FConstants {
     static let AUTH_TOKEN = "token"
+    static let NOTIFY_INDEX = "notifyIndex"
+    static let NOTIFY_PK = "notifyPK"
+    static let GOOGLE_MAP_STYLE_INDEX = "googleMapStyleIndex"
+    static let MULTI_LOGIN_TOKEN = "multiLoginToken"
     
     static let REST_API_URL = "https://back-cso.sdmed.co.kr"
     static let REST_API_COMMON = "common"
@@ -15,6 +19,7 @@ class FConstants {
     static let CLAIMS_INDEX = "index"
     static let CLAIMS_NAME = "name"
     static let CLAIMS_EXP = "exp"
+    static let CLAIMS_SUB = "sub"
     
     static let DEF_LATITUDE = 37.6618
     static let DEF_LONGITUDE = 126.76905

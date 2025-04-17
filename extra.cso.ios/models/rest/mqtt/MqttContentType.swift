@@ -1,4 +1,4 @@
-enum MqttContentType: String, Codable {
+enum MqttContentType: String, Codable, CaseIterable {
     case None
     case QNA_REQUEST
     case QNA_REPLY

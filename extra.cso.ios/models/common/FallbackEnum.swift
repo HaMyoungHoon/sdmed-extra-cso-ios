@@ -1,8 +1,8 @@
 @propertyWrapper
-struct FallbackEnum<T: RawRepresentable & Decodable>: Decodable where T.RawValue: Decodable {
+struct FallbackEnum<T: RawRepresentable & Decodable>: Decodable where T.RawValue: Decodable, T: CaseIterable, T.AllCases: Collection {
     var wrappedValue: T
     init() {
-        if let first = Mirror(reflecting: T.self).children.first?.value as? T {
+        if let first = T.allCases.first {
             wrappedValue = first
         } else {
             fatalError("FallbackEnum failed: \(T.self)")
@@ -17,7 +17,7 @@ struct FallbackEnum<T: RawRepresentable & Decodable>: Decodable where T.RawValue
            let value = T(rawValue: raw) {
             wrappedValue = value
         } else {
-            if let first = Mirror(reflecting: T.self).children.first?.value as? T {
+            if let first = T.allCases.first {
                 wrappedValue = first
             } else {
                 fatalError("FallbackEnum failed: \(T.self)")

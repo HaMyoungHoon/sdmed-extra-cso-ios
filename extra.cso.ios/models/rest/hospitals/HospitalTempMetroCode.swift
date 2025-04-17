@@ -1,5 +1,5 @@
 
-enum HospitalTempMetroCode: String, Decodable {
+enum HospitalTempMetroCode: String, Decodable, CaseIterable {
     case CODE_000000
     case CODE_110000
     case CODE_210000

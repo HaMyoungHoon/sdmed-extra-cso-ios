@@ -1,5 +1,5 @@
 import Foundation
 
-class EDIViewVM: ObservableObject {
+class EDIViewVM: FBaseViewModel {
     @Published var label: String = "EDI"
 }

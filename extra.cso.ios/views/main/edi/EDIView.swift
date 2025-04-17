@@ -1,10 +1,19 @@
 import SwiftUI
 
-struct EDIView: View {
-    @StateObject var dataContext: EDIViewVM = EDIViewVM()
+struct EDIView: FBaseView {
+    @StateObject var dataContext: EDIViewVM
+    init(_ appState: FAppState) {
+        _dataContext = StateObject(wrappedValue: EDIViewVM(appState))
+    }
     var body: some View {
         VStack {
             Text(dataContext.label)
-        }.padding()
+        }.onAppear {
+            dataContext.addEventListener(self)
+        }
+    }
+    
+    func onEvent(_ data: Any?) async {
+        
     }
 }

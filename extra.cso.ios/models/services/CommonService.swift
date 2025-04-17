@@ -46,7 +46,7 @@ class CommonService: PCommonRepository {
     func versionCheck(_ versionCheckType: VersionCheckType) async -> RestResultT<[VersionCheckModel]> {
         let url = "\(baseUrl)/versionCheck"
         let http = FHttp()
-        http.addParam("verionCheckType", versionCheckType.rawValue)
+        http.addParam("versionCheckType", versionCheckType.rawValue)
         return await http.get(url, [VersionCheckModel].self)
     }
     func serverTime() async -> RestResultT<Date> {

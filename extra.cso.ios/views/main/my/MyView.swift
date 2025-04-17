@@ -1,11 +1,20 @@
 import SwiftUI
 
-struct MyView: View {
-    @StateObject var dataContext: MyViewVM = MyViewVM()
+struct MyView: FBaseView {
+    @StateObject var dataContext: MyViewVM
+    init(_ appState: FAppState) {
+        _dataContext = StateObject(wrappedValue: MyViewVM(appState))
+    }
     
     var body: some View {
         VStack {
             Text(dataContext.label)
-        }.padding()
+        }.onAppear {
+            dataContext.addEventListener(self)
+        }
+    }
+    
+    func onEvent(_ data: Any?) async {
+        
     }
 }

@@ -1,11 +1,20 @@
 import SwiftUI
 
-struct QnAView: View {
-    @StateObject var dataContext: QnAViewVM = QnAViewVM()
+struct QnAView: FBaseView {
+    @StateObject var dataContext: QnAViewVM
+    init(_ appState: FAppState) {
+        _dataContext = StateObject(wrappedValue: QnAViewVM(appState))
+    }
     
     var body: some View {
         VStack {
             Text(dataContext.label)
-        }.padding()
+        }.onAppear {
+            dataContext.addEventListener(self)
+        }
+    }
+    
+    func onEvent(_ data: Any?) async {
+        
     }
 }

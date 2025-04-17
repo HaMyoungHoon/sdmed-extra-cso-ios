@@ -1,8 +1,14 @@
 import SwiftUI
 
 enum FAppColor {
+    static let accent = Color("AccentColor")
     static let foreground = Color("foreground")
     static let background = Color("background")
+    
+    static let buttonForeground = Color("buttonForeground")
+    static let buttonBackground = Color("buttonBackground")
+    static let disableForeground = Color("disableForeground")
+    static let disableBackground = Color("disableBackground")
     
     static let absoluteBlack = Color("absoluteBlack")
     static let absoluteWhite = Color("absoluteWhite")

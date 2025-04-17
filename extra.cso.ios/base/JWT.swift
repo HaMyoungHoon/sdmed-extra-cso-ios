@@ -42,4 +42,10 @@ class JWT {
         }
         return ret
     }
+    var subject: String? {
+        guard let ret = claims[FConstants.CLAIMS_SUB] as? String else {
+            return nil
+        }
+        return ret
+    }
 }

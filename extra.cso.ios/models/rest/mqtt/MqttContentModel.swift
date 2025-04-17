@@ -8,10 +8,10 @@ class MqttContentModel: Codable {
     @FallbackEnum var contentType: MqttContentType
     @FallbackString var targetItemPK: String
     
-    func parseThis(_ topic: String, _ payload: Data) -> MqttContentModel {
+    func parseThis(_ topic: String, _ payload: [UInt8]) -> MqttContentModel {
         self.topic = topic
         do {
-            let buff = try JSONDecoder().decode(MqttContentModel.self, from: payload)
+            let buff = try JSONDecoder().decode(MqttContentModel.self, from: Data(payload))
             self.senderPK = buff.senderPK
             self.senderName = buff.senderName
             self.content = buff.content

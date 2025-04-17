@@ -8,4 +8,7 @@ class FDI {
     static let mqttService = FServiceFactory.createMqttService()
     static let myInfoService = FServiceFactory.createMyInfoService()
     static let qnaListService = FServiceFactory.createQnAListService()
+    
+    static let notificationService = FServiceFactory.createNotificationService()
+    static let mqttBackgroundService = FServiceFactory.createMqttBackgroundService()
 }

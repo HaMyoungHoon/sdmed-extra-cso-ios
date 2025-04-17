@@ -1,19 +1,49 @@
 import Foundation
 
 class FAmhohwa {
+    static func getUserID() -> String {
+        guard let encoded = getTokenID().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return ""
+        }
+        return encoded
+    }
+    static func getUserName() -> String {
+        guard let encoded = getTokenName().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return ""
+        }
+        return encoded
+    }
+    static func getTokenID() -> String {
+        guard let token = FRestVariable.ins.token else {
+            return ""
+        }
+        return JWT(token).subject ?? ""
+    }
+    static func getTokenName() -> String {
+        guard let token = FRestVariable.ins.token else {
+            return ""
+        }
+        return JWT(token).userName ?? ""
+    }
+    static func getThisPK() -> String {
+        guard let token = FRestVariable.ins.token else {
+            return ""
+        }
+        return JWT(token).userPK ?? ""
+    }
     static func intervalBetweenDate(_ expiredDate: Int?) -> Bool {
         guard let data = expiredDate else {
             return false
         }
-        return true
+        let expired = FDateTime2().setThis(data)
+        let now = FDateTime2().setThis(Int(Date().timeIntervalSince1970)).addDays(-10)
+        return expired.getDaysBetween(now) > 0
     }
     static func intervalBetweenDate(_ expiredDate: TimeInterval?) -> Bool {
         guard let data = expiredDate else {
             return false
         }
-        let now = FDateTime2().setThis(Int(Date().timeIntervalSince1970))
-        
-        return true
+        return intervalBetweenDate(data.toInt)
     }
     static func tokenIntervalValid(_ token: String?) -> Bool {
         guard let tokenBuff = token else {
@@ -46,7 +76,7 @@ class FAmhohwa {
             if buff.result == true {
                 let newToken = buff.data ?? ""
                 if rhsTokenIsMost(newToken) {
-                    FStorage.putAuthToken(newToken)
+                    FStorage.setAuthToken(newToken)
                     addLoginData()
                 }
                 FRestVariable.ins.token = FStorage.getAuthToken()
@@ -71,13 +101,28 @@ class FAmhohwa {
         return new >= previous
     }
     static func addLoginData() {
-        
+        FStorage.addMultiLoginData(UserMultiLoginModel().apply {
+            $0.thisPK = getThisPK()
+            $0.id = getTokenID()
+            $0.name = getTokenName()
+            $0.token = FStorage.getAuthToken()
+            $0.isLogin = true
+        })
     }
     static func delLoginData() {
-        
+        FStorage.delMultiLoginData(UserMultiLoginModel().apply {
+            $0.thisPK = getThisPK()
+            $0.id = getTokenID()
+            $0.name = getTokenName()
+            $0.token = FStorage.getAuthToken()
+            $0.isLogin = true
+        })
     }
     static func removeLoginData() {
         FRestVariable.ins.token = nil
         FStorage.removeAuthToken()
+    }
+    static func appVersion() -> String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
     }
 }

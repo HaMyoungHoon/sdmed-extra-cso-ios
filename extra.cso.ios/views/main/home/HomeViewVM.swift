@@ -1,5 +1,5 @@
 import Foundation
 
-class HomeViewVM: ObservableObject {
+class HomeViewVM: FBaseViewModel {
     @Published var label: String = "Home"
 }
