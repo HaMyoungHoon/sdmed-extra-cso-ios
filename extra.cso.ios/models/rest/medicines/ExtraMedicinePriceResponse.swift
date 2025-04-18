@@ -11,6 +11,10 @@ class ExtraMedicinePriceResponse: FDataModelClass<ExtraMedicinePriceResponse.Cli
     @FallbackString var standard: String
     @FallbackString var etc1: String
     
+    var standardWithUnit: String {
+        return "\(standard)%"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case thisPK, mainIngredientCode, mainIngredientName, clientName, makerName, orgName, kdCode, customPrice, maxPrice, standard, etc1
     }

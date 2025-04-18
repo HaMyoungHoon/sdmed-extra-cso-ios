@@ -13,7 +13,7 @@ struct ContentView: View {
     var loadingView: some View {
         ZStack {
             if appState.isLoading {
-                Color.black.opacity(0.1)
+                FAppColor.backdrop
                     .edgesIgnoringSafeArea(.all)
                     .zIndex(99)
                 ProgressView()
@@ -29,7 +29,7 @@ struct ContentView: View {
             if let toast = appState.toastMessage {
                 Text(toast)
                     .padding()
-                    .background(Color.black.opacity(0.8))
+                    .background(FAppColor.scrim)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .padding(.top, 5)
@@ -51,7 +51,7 @@ struct ContentView: View {
             if appState.updateVisible {
                 Text("new_version_update_desc")
                 HStack {
-                    Text("update_desc")
+                    Text("update_dsec")
                 }
             }
         }.zIndex(101)

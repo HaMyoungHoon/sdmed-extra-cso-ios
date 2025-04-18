@@ -10,5 +10,29 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #2 in EDIView.body.getter:EDIView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataContext.buff">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PageNumberModel.selectThis():PageNumberModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isSelect">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PriceView.setPageNumberCommand(_:):PriceView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "array[1] as? PageNumberModel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

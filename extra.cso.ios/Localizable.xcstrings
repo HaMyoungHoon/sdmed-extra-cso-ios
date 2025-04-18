@@ -2194,9 +2194,6 @@
         }
       }
     },
-    "update_desc" : {
-
-    },
     "update_dsec" : {
       "extractionState" : "manual",
       "localizations" : {

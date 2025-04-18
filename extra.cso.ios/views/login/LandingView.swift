@@ -28,11 +28,9 @@ struct LandingView: FBaseView {
         }
     }
     var loginButton: some View {
-        VStack {
+        Group {
             if dataContext.appState.launchState == LaunchState.Launching {
-                Button(action: {
-                    dataContext.relayCommand.execute(LandingViewVM.ClickEvent.LOGIN)
-                }) {
+                Button(action: { dataContext.relayCommand.execute(LandingViewVM.ClickEvent.LOGIN) }) {
                     Text("login_btn_desc").frame(maxWidth: .infinity)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 12)

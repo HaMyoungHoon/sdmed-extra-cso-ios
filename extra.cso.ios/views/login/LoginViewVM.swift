@@ -3,16 +3,26 @@ import Foundation
 class LoginViewVM: FBaseViewModel {
     @Published var id: String = ""
     @Published var pw: String = ""
+    @Published var multiLogin: [UserMultiLoginModel] = []
+    @Published var multiLoginVisible = false
+    @Published var loginDialogVisible: Bool = false
+    
+    var signAble: Bool {
+        return id.count >= 3 && pw.count >= 4
+    }
     
     override init(_ appState: FAppState) {
         super.init(appState)
     }
     
+    func showMultiLogin() {
+        multiLoginVisible = true
+    }
     func signIn() {
-        appState.isLoading = true
+        loading()
         Task {
             let ret = await commonService.signIn(id, pw)
-            self.appState.isLoading = false
+            loading(false)
             if ret.result == true {
                 FRestVariable.ins.token = ret.data
                 FStorage.setAuthToken(ret.data)
@@ -20,11 +30,12 @@ class LoginViewVM: FBaseViewModel {
                 appState.updateToken()
                 return
             }
-            self.appState.toastMessage = ret.msg
+            toast(ret.msg)
         }
     }
     
     enum ClickEvent: Int, CaseIterable {
         case LOGIN = 0
+        case MULTI_LOGIN = 1
     }
 }

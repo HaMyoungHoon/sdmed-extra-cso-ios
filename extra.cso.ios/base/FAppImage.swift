@@ -6,7 +6,11 @@ class FAppImage {
     static let hospitalRedNamed: String = "hospital_red"
     static let pharmacyGreenNamed: String = "pharmacy_green"
     
-    static let landingBackground = UIImage(named: landingBackgroundNamed)
-    static let hospitalRed = UIImage(named: hospitalRedNamed)
-    static let pharmacyGreen = UIImage(named: pharmacyGreenNamed)
+    static let close = Image(systemName: "xmark")
+    static let doubleLeft = Image(systemName: "chevron.left.2")
+    static let doubleRight = Image(systemName: "chevron.right.2")
+    
+    static let landingBackground = Image(landingBackgroundNamed)
+    static let hospitalRed = Image(hospitalRedNamed)
+    static let pharmacyGreen = Image(pharmacyGreenNamed)
 }

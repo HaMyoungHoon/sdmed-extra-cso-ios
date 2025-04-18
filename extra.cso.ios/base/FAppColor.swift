@@ -4,6 +4,13 @@ enum FAppColor {
     static let accent = Color("AccentColor")
     static let foreground = Color("foreground")
     static let background = Color("background")
+
+    static let border = Color("border")
+    static let scrim = Color("#000000", 0.4)
+    static let dimmedBackground = Color("#000000", 0.5)
+    static let overlay = Color("#808080", 0.3)
+    static let backdrop = Color("#FFFFFF", 0.25)
+    static let modalBackground = Color("#121212", 0.6)
     
     static let buttonForeground = Color("buttonForeground")
     static let buttonBackground = Color("buttonBackground")
@@ -37,4 +44,25 @@ enum FAppColor {
     static let qnaBackStateOk = Color("qnaBackStateOk")
     static let qnaBackStateRecep = Color("qnaBackStateRecep")
     static let qnaBackStateReply = Color("qnaBackStateReply")
+}
+
+extension Color {
+    init(_ hex: String, _ opacity: Double) {
+        let hex = hex.replacingOccurrences(of: "#", with: "")
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let r: Double
+        let g: Double
+        let b: Double
+        if hex.count == 6 {
+            r = Double((int >> 16) & 0xFF) / 255
+            g = Double((int >> 8) & 0xFF) / 255
+            b = Double(int & 0xFF) / 255
+        } else {
+            r = 0
+            g = 0
+            b = 0
+        }
+        self.init(.sRGB, red: r, green: g, blue: b, opacity: opacity)
+    }
 }
