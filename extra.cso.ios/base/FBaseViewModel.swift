@@ -33,6 +33,7 @@ open class FBaseViewModel: ObservableObject {
     func toast(_ msg: String?) {
         self.appState.toast(msg)
     }
+    
     open func execute(_ data: Any?) async -> Void {
     }
     open func fakeInit() {

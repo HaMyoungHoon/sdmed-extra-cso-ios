@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum LaunchState {
     case None
@@ -12,6 +13,7 @@ class FAppState: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var toastMessage: String? = nil
     @Published var updateVisible: Bool = false
+    @AppStorage(FConstants.NOTIFY_INDEX) var notifyIndex: Int = 0
     
     init() {
         checkVersion()
@@ -60,9 +62,13 @@ class FAppState: ObservableObject {
     }
     
     func loading(_ isVisible: Bool = true) {
-        self.isLoading = isVisible
+        DispatchQueue.main.async {
+            self.isLoading = isVisible
+        }
     }
     func toast(_ message: String? = nil) {
-        self.toastMessage = message
+        DispatchQueue.main.async {
+            self.toastMessage = message
+        }
     }
 }

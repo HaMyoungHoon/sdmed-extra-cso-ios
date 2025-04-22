@@ -13,10 +13,6 @@ class UserMultiLoginModel: FDataModelClass<UserMultiLoginModel.ClickEvent>, Deco
         self.isLogin = rhs.isLogin
         return self
     }
-    func apply(_ block: (Self) -> Void) -> Self {
-        block(self)
-        return self
-    }
     enum ClickEvent: Int, CaseIterable {
         case THIS = 0
     }

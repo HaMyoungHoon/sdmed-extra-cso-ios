@@ -35,6 +35,18 @@ class QnAFileModel: FDataModelClass<QnAFileModel.ClickEvent>, Decodable, Encodab
         try container.encodeIfPresent(_regDate.wrappedValue, forKey: CodingKeys.regDate)
     }
     
+    func copy(_ rhs: QnAFileModel) -> QnAFileModel {
+        self.thisPK = rhs.thisPK
+        self.headerPK = rhs.headerPK
+        self.blobUrl = rhs.blobUrl
+        self.sasKey = rhs.sasKey
+        self.blobName = rhs.blobName
+        self.originalFilename = rhs.originalFilename
+        self.mimeType = rhs.mimeType
+        self.regDate = rhs.regDate
+        return self
+    }
+    
     enum CodingKeys: String, CodingKey {
         case thisPK, headerPK, blobUrl, sasKey, blobName, originalFilename, mimeType, regDate
     }

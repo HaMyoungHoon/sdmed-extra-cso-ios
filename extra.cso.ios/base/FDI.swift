@@ -11,4 +11,6 @@ class FDI {
     
     static let notificationService = FServiceFactory.createNotificationService()
     static let mqttBackgroundService = FServiceFactory.createMqttBackgroundService()
+    
+    static let backgroundUserFileUploadService = FServiceFactory.createBackgroundUserFileUploadService()
 }

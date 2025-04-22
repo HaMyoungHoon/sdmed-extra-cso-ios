@@ -24,6 +24,7 @@ class QnAReplyFileModel: FDataModelClass<QnAReplyFileModel.ClickEvent>, Decodabl
         try container.encodeIfPresent(_mimeType.wrappedValue, forKey: CodingKeys.mimeType)
         try container.encodeIfPresent(_regDate.wrappedValue, forKey: CodingKeys.regDate)
     }
+    
     enum CodingKeys: String, CodingKey {
         case thisPK, replyPK, blobUrl, originalFilename, mimeType, regDate
     }

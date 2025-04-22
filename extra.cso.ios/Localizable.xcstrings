@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
+    "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        }
+      }
+    },
     "add_desc" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -677,6 +687,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "EDI 뷰"
+          }
+        }
+      }
+    },
+    "end_date_desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "end date"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "종료일"
           }
         }
       }
@@ -2139,6 +2166,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "회원가입"
+          }
+        }
+      }
+    },
+    "start_date_desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "start date"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작일"
           }
         }
       }

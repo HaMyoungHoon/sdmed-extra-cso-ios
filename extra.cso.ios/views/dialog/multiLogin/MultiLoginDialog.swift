@@ -44,7 +44,7 @@ struct MultiLoginDialog: FBaseView {
                 ForEach(dataContext.items, id: \.thisPK) { item in
                     HStack {
                         Text(item.name)
-                        Button(action: { item.onClick(UserMultiLoginModel.ClickEvent.THIS) }) {
+                        Button(action: { item.onClick(UserMultiLoginModel.ClickEvent.THIS, UserMultiLoginModel.self) }) {
                             Text("login_btn_desc")
                                 .padding(.horizontal, 15)
                                 .padding(.vertical, 8)

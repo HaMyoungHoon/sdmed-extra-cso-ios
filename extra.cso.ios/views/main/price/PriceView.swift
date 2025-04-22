@@ -101,14 +101,14 @@ struct PriceView: FBaseView {
             HStack {
                 FAppImage.doubleLeft
                     .tint(model.first ? FAppColor.disableForeground : FAppColor.accent)
-                    .onTapGesture {model.onClick(PaginationModel.ClickEvent.FIRST) }
+                    .onTapGesture {model.onClick(PaginationModel.ClickEvent.FIRST, PaginationModel.self) }
                 ScrollView(.horizontal, showsIndicators: false) {
                     ScrollViewReader { proxy in
                         LazyHStack {
                             ForEach(model.pages, id: \.pageNumber) { item in
                                 pageItem(item)
                             }
-                        }.onChange(of: dataContext.page) { newValue in
+                        }.onChange(of: dataContext.page, initial: true) { oldCount, newValue in
                             proxy.scrollTo(newValue + 1)
                         }
                     }
@@ -116,7 +116,7 @@ struct PriceView: FBaseView {
                 .fixedSize(horizontal: false, vertical: true)
                 FAppImage.doubleRight
                     .tint(model.last ? FAppColor.disableForeground : FAppColor.accent)
-                    .onTapGesture { model.onClick(PaginationModel.ClickEvent.LAST) }
+                    .onTapGesture { model.onClick(PaginationModel.ClickEvent.LAST, PaginationModel.self) }
             }
         }
     }
@@ -131,7 +131,7 @@ struct PriceView: FBaseView {
                         .foregroundColor(item.isSelect ? FAppColor.buttonForeground : FAppColor.foreground)
                 }
                 .onTapGesture {
-                    item.onClick(PageNumberModel.ClickEvent.THIS)
+                    item.onClick(PageNumberModel.ClickEvent.THIS, PageNumberModel.self)
                 }
         }
     }

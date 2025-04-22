@@ -20,7 +20,7 @@ struct BlobUploadModel: Codable {
         try container.encodeIfPresent(_regDate.wrappedValue, forKey: CodingKeys.regDate)
     }
     
-    mutating func copy(_ rhs: BlobUploadModel) -> BlobUploadModel {
+    func copy(_ rhs: BlobUploadModel) -> BlobUploadModel {
         self.thisPK = rhs.thisPK
         self.blobUrl = rhs.blobUrl
         self.sasKey = rhs.sasKey
@@ -32,9 +32,14 @@ struct BlobUploadModel: Codable {
         return self
     }
     var blobUrlKey: String {
-        return "\(blobUrl)\(sasKey)"
+        return "\(blobUrl)?\(sasKey)"
     }
     
+    func apply(_ block: (Self) -> Void) -> Self {
+        block(self)
+        return self
+    }
+
     enum CodingKeys: String, CodingKey {
         case thisPK, blobUrl, sasKey, blobName, uploaderPK, originalFilename, mimeType, regDate
     }

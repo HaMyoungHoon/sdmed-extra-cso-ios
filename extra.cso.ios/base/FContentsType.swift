@@ -202,7 +202,7 @@ class FContentsType {
         default:        return "application/octet-stream"
         }
     }
-    func getExtMimeType(_ mimeType: String?) -> String {
+    static func getExtMimeType(_ mimeType: String?) -> String {
         switch mimeType {
         case FContentsType.type_aac:      return "aac"
         case FContentsType.type_abw:      return "abw"

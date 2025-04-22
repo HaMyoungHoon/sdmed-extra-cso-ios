@@ -33,7 +33,13 @@ class FServiceFactory {
     static func createMqttBackgroundService() -> FMqttBackgroundService {
         return mqttBackgroundService
     }
+    
+    static func createBackgroundUserFileUploadService() -> FBackgroundUserFileUploadService {
+        return backgroundUserFileUploadService
+    }
 
     static private let notificationService = FNotificationService()
     static private let mqttBackgroundService = FMqttBackgroundService()
+    
+    static private let backgroundUserFileUploadService = FBackgroundUserFileUploadService()
 }

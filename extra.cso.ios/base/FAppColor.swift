@@ -2,6 +2,7 @@ import SwiftUI
 
 enum FAppColor {
     static let accent = Color("AccentColor")
+    static let error = Color("error")
     static let foreground = Color("foreground")
     static let background = Color("background")
 

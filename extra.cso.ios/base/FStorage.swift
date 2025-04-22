@@ -53,6 +53,25 @@ class FStorage {
         SecItemDelete(query as CFDictionary)
     }
     
+    static func getNotifyIndex() -> Int {
+        return UserDefaults.standard.integer(forKey: FConstants.NOTIFY_INDEX)
+    }
+    static func setNotifyIndex(_ index: Int) {
+        UserDefaults.standard.set(index, forKey: FConstants.NOTIFY_INDEX)
+    }
+    static func removeNotifyIndex() {
+        UserDefaults.standard.removeObject(forKey: FConstants.NOTIFY_INDEX)
+    }
+    static func getNotifyPK() -> String {
+        return UserDefaults.standard.string(forKey: FConstants.NOTIFY_PK) ?? ""
+    }
+    static func setNotifyPK(_ pk: String) {
+        UserDefaults.standard.set(pk, forKey: FConstants.NOTIFY_PK)
+    }
+    static func removeNotifyPK() {
+        UserDefaults.standard.removeObject(forKey: FConstants.NOTIFY_PK)
+    }
+    
     static func getAuthToken() -> String {
         return getString(FConstants.AUTH_TOKEN)
     }

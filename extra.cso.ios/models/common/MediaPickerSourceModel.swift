@@ -1,20 +1,38 @@
 import Foundation
+import Photos
 
-class MediaPickerSourceModel: FDataModelClass<MediaPickerSourceModel.ClickEvent> {
-    var thisPK: String = UUID().uuidString
-    var mediaUrl: String? = nil
+class MediaPickerSourceModel {
+    var mediaUrl: URL? = nil
     var mediaName: String = ""
     var mediaFileType: MediaFileType = MediaFileType.UNKNOWN
     var mediaDateTime: String = ""
     var mediaMimeType: String = ""
     
-    @Published var duration = -1
-    @Published var clickState = false
-    @Published var num: Int? = nil
-    @Published var lastClick = false
+    func apply(_ block: (Self) -> Void) -> Self {
+        block(self)
+        return self
+    }
     
-    enum ClickEvent: Int, CaseIterable {
-        case SELECT = 0
-        case SELECT_LONG = 1
+    func parse(_ data: MediaPickerSourceBuffModel?) async -> MediaPickerSourceModel? {
+        guard let data = data else { return nil }
+        mediaFileType = MediaFileType.parse(data.asset.mediaType)
+        mediaDateTime = FDateTime().setThis(data.asset.creationDate).toString()
+        guard let resource = PHAssetResource.assetResources(for: data.asset).first else {
+            return nil
+        }
+        let filename = UUID().uuidString + "." + resource.originalFilename
+        let outputURL = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
+        mediaUrl = outputURL
+        mediaName = resource.originalFilename
+        mediaMimeType = FContentsType.findContentType(mediaName)
+        return await withCheckedContinuation { continuation in
+            PHAssetResourceManager.default().writeData(for: resource, toFile: outputURL, options: nil) { error in
+                if let _ = error {
+                    continuation.resume(returning: nil)
+                } else {
+                    continuation.resume(returning: self.mediaUrl == nil ? nil : self)
+                }
+            }
+        }
     }
 }

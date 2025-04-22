@@ -28,7 +28,15 @@ open class FLocalize {
         }
         return _fullTimeSpanNegativePattern!
     }
-
+    
+    func toLocale() -> Locale {
+        if self === FLocalize.KOREA {
+            return Locale(identifier: "ko_KR")
+        } else if self === FLocalize.KOREA_LUNA {
+            return Locale(identifier: "ko_KR")
+        }
+        return Locale(identifier: "en_US")
+    }
     func getCultureInfo() -> String {
         if self === FLocalize.KOREA {
             return "ko-kr"
@@ -52,6 +60,12 @@ open class FLocalize {
             return "yyyy-MM-dd hh:mm:ss (ddd)"
         }
         return "MM-dd-yyyy hh:mm:ss (ddd)"
+    }
+    func getDateOffset() -> String {
+        if self === FLocalize.KOREA || self === FLocalize.KOREA_LUNA {
+            return "yyyy-MM-dd"
+        }
+        return "MM-dd-yyyy"
     }
 
     private func cvtLunarDay(_ solarDate: FDateTime) -> FDateTime {

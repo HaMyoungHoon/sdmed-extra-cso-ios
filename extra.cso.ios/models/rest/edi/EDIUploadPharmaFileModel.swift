@@ -32,6 +32,19 @@ class EDIUploadPharmaFileModel: FDataModelClass<EDIUploadPharmaFileModel.ClickEv
         try container.encodeIfPresent(_mimeType.wrappedValue, forKey: CodingKeys.mimeType)
         try container.encodeIfPresent(_regDate.wrappedValue, forKey: CodingKeys.regDate)
     }
+    
+    func copy(_ rhs: EDIUploadPharmaFileModel) -> EDIUploadPharmaFileModel {
+        self.thisPK = rhs.thisPK
+        self.ediPharmaPK = rhs.ediPharmaPK
+        self.pharmaPK = rhs.pharmaPK
+        self.blobUrl = rhs.blobUrl
+        self.sasKey = rhs.sasKey
+        self.blobName = rhs.blobName
+        self.originalFilename = rhs.originalFilename
+        self.mimeType = rhs.mimeType
+        self.regDate = rhs.regDate
+        return self
+    }
     var blobUrlKey: String {
         return "\(blobUrl)?\(sasKey)"
     }

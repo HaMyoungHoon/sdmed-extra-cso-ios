@@ -164,6 +164,13 @@ public class FDateTime {
         _dateData = Int64(data * _ticksPerSecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
         return self
     }
+    func setThis(_ data: Date?) -> FDateTime {
+        let dataBuff = data ?? Date()
+        let timeZone = TimeZone.current
+        let timeZoneOffset = timeZone.secondsFromGMT() / 60 / 60
+        _dateData = Int64(dataBuff.timeIntervalSince1970.toInt * _ticksPerSecond) + dateToTicks(1970, 1, 1) + Int64(timeZoneOffset * _ticksPerHour)
+        return self
+    }
     func setThis(_ data: Int64) -> FDateTime {
         _dateData = data
         return self
@@ -193,11 +200,17 @@ public class FDateTime {
 
         return Int64(daysToYear(year) + days[month - 1] + day - 1) * Int64(_ticksPerDay)
     }
-    func toString(_ format: String) -> String {
+    func toString(_ format: String? = "yyyy-MM-dd") -> String {
         return FDateTimeFormat.ins.format(self, format, _localize)
     }
-    func toString(_ format: String, _ localize: FLocalize) -> String {
+    func toString(_ format: String? = "yyyy-MM-dd", _ localize: FLocalize) -> String {
         return FDateTimeFormat.ins.format(self, format, localize)
+    }
+    func toDate() -> Date {
+        let timeZone = TimeZone.current
+        let timeZoneOffset = timeZone.secondsFromGMT() / 60 / 60
+        let timeInterval = Double(_dateData - dateToTicks(1970, 1, 1) - Int64(timeZoneOffset * _ticksPerHour)) / Double(_ticksPerSecond)
+        return Date(timeIntervalSince1970: timeInterval)
     }
     func getMonthOfFirstDay() -> FDateTime {
         return FDateTime().setThis(year, month, 1)

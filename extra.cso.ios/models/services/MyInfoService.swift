@@ -8,6 +8,11 @@ class MyInfoService: PMyInfoRepository {
         let http = FHttp()
         return await http.get(url, ExtraMyInfoResponse.self)
     }
+    func getTrainingData() async -> RestResultT<[UserTrainingModel]> {
+        let url = "\(baseUrl)/data/trainingData"
+        let http = FHttp()
+        return await http.get(url, [UserTrainingModel].self)
+    }
     func putPasswordChange(_ currentPW: String, _ afterPW: String, _ confirmPW: String) async -> RestResultT<ExtraMyInfoResponse> {
         let url = "\(baseUrl)/passwordChange"
         let http = FHttp()

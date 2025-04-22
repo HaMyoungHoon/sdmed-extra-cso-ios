@@ -1,4 +1,8 @@
 import Foundation
+import ImageIO
+import MobileCoreServices
+import SwiftUI
+import UniformTypeIdentifiers
 
 class FExtensions {
     static let ins = FExtensions()
@@ -43,6 +47,12 @@ class FExtensions {
     }
 }
 
+extension Date {
+    var toString: String {
+        return FDateTime().setThis(self.timeIntervalSince1970).toString("yyyy-MM-dd")
+    }
+}
+
 extension String {
     subscript (_ index: Int) -> Character {
         let charIndex = self.index(self.startIndex, offsetBy: index)
@@ -82,6 +92,9 @@ extension String {
     }
     mutating func replace(_ old: String, _ new: String) -> String {
         return self.replacingOccurrences(of: old, with: new)
+    }
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
     }
     var htmlToAttributedString: NSAttributedString? {
         guard let data = self.data(using: .utf8) else {
@@ -166,5 +179,24 @@ extension Double {
 extension Array: PDefaultInitializable {
     public init() {
         self = []
+    }
+}
+
+extension UIImage {
+    func webpData(_ compressionQuality: CGFloat = 1.0) -> Data? {
+        guard let cgImage = self.cgImage else { return nil }
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(data, UTType.webP.identifier as CFString, 1, nil) else {
+            return nil
+        }
+
+        let properties: [CFString: Any] = [
+            kCGImageDestinationLossyCompressionQuality: compressionQuality
+        ]
+
+        CGImageDestinationAddImage(destination, cgImage, properties as CFDictionary)
+        guard CGImageDestinationFinalize(destination) else { return nil }
+
+        return data as Data
     }
 }

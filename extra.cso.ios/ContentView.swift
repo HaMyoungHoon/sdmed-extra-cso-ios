@@ -8,6 +8,8 @@ struct ContentView: View {
             updateView
             toastView
             contentView().environmentObject(appState)
+        }.onAppear {
+            FDI.notificationService.checkPermission()
         }
     }
     var loadingView: some View {

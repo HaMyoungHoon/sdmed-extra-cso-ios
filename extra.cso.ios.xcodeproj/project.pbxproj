@@ -8,16 +8,64 @@
 
 /* Begin PBXBuildFile section */
 		285E5274D7F90B3F9741A17D /* Pods_extra_cso_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */; };
+		F003F8CE2DB5EBB6000989B1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F003F8CD2DB5EBB6000989B1 /* WidgetKit.framework */; };
+		F003F8D02DB5EBB6000989B1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F003F8CF2DB5EBB6000989B1 /* SwiftUI.framework */; };
+		F003F8E12DB5EBB7000989B1 /* CSOUploadWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F003F8CC2DB5EBB6000989B1 /* CSOUploadWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F003F8DF2DB5EBB7000989B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0C16A212D97C12F008B3297 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F003F8CB2DB5EBB6000989B1;
+			remoteInfo = CSOUploadWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F003F8E62DB5EBB7000989B1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F003F8E12DB5EBB7000989B1 /* CSOUploadWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_extra_cso_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8456D3B17E23A10E40595C80 /* Pods-extra.cso.ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extra.cso.ios.release.xcconfig"; path = "Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios.release.xcconfig"; sourceTree = "<group>"; };
+		F003F8CC2DB5EBB6000989B1 /* CSOUploadWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CSOUploadWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F003F8CD2DB5EBB6000989B1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F003F8CF2DB5EBB6000989B1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F0C16A292D97C12F008B3297 /* extra.cso.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = extra.cso.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71FB4C36FEEB891EAAF0A0D /* Pods-extra.cso.ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-extra.cso.ios.debug.xcconfig"; path = "Target Support Files/Pods-extra.cso.ios/Pods-extra.cso.ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F003F8E22DB5EBB7000989B1 /* Exceptions for "CSOUploadWidget" folder in "CSOUploadWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F003F8CB2DB5EBB6000989B1 /* CSOUploadWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F003F8D12DB5EBB6000989B1 /* CSOUploadWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F003F8E22DB5EBB7000989B1 /* Exceptions for "CSOUploadWidget" folder in "CSOUploadWidgetExtension" target */,
+			);
+			path = CSOUploadWidget;
+			sourceTree = "<group>";
+		};
 		F0C16A2B2D97C12F008B3297 /* extra.cso.ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = extra.cso.ios;
@@ -26,6 +74,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F003F8C92DB5EBB6000989B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F003F8D02DB5EBB6000989B1 /* SwiftUI.framework in Frameworks */,
+				F003F8CE2DB5EBB6000989B1 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0C16A262D97C12F008B3297 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				29BF71D9E50DED11F7B76E05 /* Pods_extra_cso_ios.framework */,
+				F003F8CD2DB5EBB6000989B1 /* WidgetKit.framework */,
+				F003F8CF2DB5EBB6000989B1 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -58,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				F0C16A2B2D97C12F008B3297 /* extra.cso.ios */,
+				F003F8D12DB5EBB6000989B1 /* CSOUploadWidget */,
 				F082108F2DADD6DC00D77559 /* Frameworks */,
 				F0C16A2A2D97C12F008B3297 /* Products */,
 				5CB0361DFFF8BB8511FCEB3B /* Pods */,
@@ -68,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				F0C16A292D97C12F008B3297 /* extra.cso.ios.app */,
+				F003F8CC2DB5EBB6000989B1 /* CSOUploadWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +136,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F003F8CB2DB5EBB6000989B1 /* CSOUploadWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F003F8E32DB5EBB7000989B1 /* Build configuration list for PBXNativeTarget "CSOUploadWidgetExtension" */;
+			buildPhases = (
+				F003F8C82DB5EBB6000989B1 /* Sources */,
+				F003F8C92DB5EBB6000989B1 /* Frameworks */,
+				F003F8CA2DB5EBB6000989B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F003F8D12DB5EBB6000989B1 /* CSOUploadWidget */,
+			);
+			name = CSOUploadWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = CSOUploadWidgetExtension;
+			productReference = F003F8CC2DB5EBB6000989B1 /* CSOUploadWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F0C16A282D97C12F008B3297 /* extra.cso.ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0C16A382D97C130008B3297 /* Build configuration list for PBXNativeTarget "extra.cso.ios" */;
@@ -85,10 +168,12 @@
 				F0C16A272D97C12F008B3297 /* Resources */,
 				803474ABC75397B559199B8F /* [CP] Copy Pods Resources */,
 				78ACDF9AB3770A9376C47360 /* [CP] Embed Pods Frameworks */,
+				F003F8E62DB5EBB7000989B1 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F003F8E02DB5EBB7000989B1 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F0C16A2B2D97C12F008B3297 /* extra.cso.ios */,
@@ -108,6 +193,9 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					F003F8CB2DB5EBB6000989B1 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					F0C16A282D97C12F008B3297 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -129,11 +217,19 @@
 			projectRoot = "";
 			targets = (
 				F0C16A282D97C12F008B3297 /* extra.cso.ios */,
+				F003F8CB2DB5EBB6000989B1 /* CSOUploadWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F003F8CA2DB5EBB6000989B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0C16A272D97C12F008B3297 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +299,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F003F8C82DB5EBB6000989B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0C16A252D97C12F008B3297 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -212,7 +315,83 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F003F8E02DB5EBB7000989B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F003F8CB2DB5EBB6000989B1 /* CSOUploadWidgetExtension */;
+			targetProxy = F003F8DF2DB5EBB7000989B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		F003F8E42DB5EBB7000989B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CSOUploadWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CSOUploadWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sdmed.extra-cso-ios.CSOUploadWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F003F8E52DB5EBB7000989B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UP5QMHP8AR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CSOUploadWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CSOUploadWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "sdmed.extra-cso-ios.CSOUploadWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		F0C16A362D97C130008B3297 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -344,6 +523,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -354,7 +534,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,6 +575,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -405,7 +586,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,6 +614,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F003F8E32DB5EBB7000989B1 /* Build configuration list for PBXNativeTarget "CSOUploadWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F003F8E42DB5EBB7000989B1 /* Debug */,
+				F003F8E52DB5EBB7000989B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F0C16A242D97C12F008B3297 /* Build configuration list for PBXProject "extra.cso.ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

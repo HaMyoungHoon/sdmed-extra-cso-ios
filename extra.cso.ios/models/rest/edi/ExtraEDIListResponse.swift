@@ -9,10 +9,9 @@ class ExtraEDIListResponse: FDataModelClass<ExtraEDIListResponse.ClickEvent>, De
     @FallbackString var tempOrgName: String
     @FallbackEnum var ediState: EDIState
     @FallbackEnum var ediType: EDIType
-    @FallbackString var regDate: String
+    @FallbackDate var regDate: Date
     @FallbackDataClass var pharmaList: [String]
     
-    @Published var isSelected: Bool = false
     var tempOrgString: String {
         return "(\(_tempOrgName.wrappedValue))"
     }
@@ -20,7 +19,7 @@ class ExtraEDIListResponse: FDataModelClass<ExtraEDIListResponse.ClickEvent>, De
         return ediType == EDIType.DEFAULT
     }
     var getRegDateString: String {
-        return FDateTime().setThis(regDate).toString("yyyy-MM")
+        return FDateTime().setThis(regDate.timeIntervalSince1970).toString("yyyy-MM")
     }
     var ediColor: Color {
         return ediState.parseEDIColor()

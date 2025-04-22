@@ -1,10 +1,15 @@
 class FDataModelClass<T> where T: CaseIterable {
     var relayCommand: PCommand? = nil
-    open func onClick(_ eventName: T) {
-        relayCommand?.execute([eventName, self])
+    open func onClick<T1>(_ eventName: T, _ type: T1.Type) {
+        relayCommand?.execute([eventName, self as! T1])
     }
-    open func onLongClick(_ eventName: T) -> Bool {
-        relayCommand?.execute([eventName, self])
+    open func onLongClick<T1>(_ eventName: T, _ type: T1.Type) -> Bool {
+        relayCommand?.execute([eventName, self as! T1])
         return true
+    }
+    
+    open func apply<T1>(_ block: (T1) -> Void) -> T1 {
+        block(self as! T1)
+        return self as! T1
     }
 }

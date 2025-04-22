@@ -2,6 +2,7 @@
   "sourceLanguage" : "ko",
   "strings" : {
     "app_name" : {
+      "comment" : "sd medical cso",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -48,6 +49,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "extra.cso.ios"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "you need permission to select photos and files"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사진 및 파일을 선택하기 위한 권한이 필요합니다"
           }
         }
       }
