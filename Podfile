@@ -8,4 +8,5 @@ target 'extra.cso.ios' do
   pod 'GoogleMaps', '9.4.0'
   pod 'Google-Maps-iOS-Utils', '6.1.0' # x-release-please-version
   pod 'CocoaMQTT', '2.1.6'
+  pod 'libwebp', '1.5.0'
 end

@@ -3,6 +3,7 @@ import SwiftUI
 import ImageIO
 import MobileCoreServices
 import Accelerate
+import libwebp
 
 class FImageUtils {
     static func fileDelete(_ fileURL: URL) {
@@ -66,7 +67,7 @@ class FImageUtils {
         return FAppImage.imageNoImage
     }
     
-    static func urlToFile(_ fileUrl: URL, _ fileName: String) -> URL {
+    static func urlToFile(_ fileUrl: URL, _ fileName: String, _ originSize: Int) -> URL {
         let fileExt = fileUrl.pathExtension.lowercased()
         guard isImage(fileExt) else {
             return fileUrl
@@ -79,7 +80,7 @@ class FImageUtils {
             return fileUrl
         }
 
-        inputImage = fixImageOrientation(inputImage)
+//        inputImage = fixImageOrientation(inputImage)
 
         let fileManager = FileManager.default
         let docsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -93,9 +94,18 @@ class FImageUtils {
         let outputURL = rootDir.appendingPathComponent("\(fileName).\(fileExtFinal)")
 
         if !fileManager.fileExists(atPath: outputURL.path) {
-            if let resizedImage = resizeImage(inputImage, inputImage.size),
-               let webpData = resizedImage.webpData() {
-                try? webpData.write(to: outputURL)
+            if let resizedImage = resizeImage(inputImage, inputImage.size) {
+                if let webpData = encodeToWebP(resizedImage, originSize) {
+                    try? webpData.write(to: outputURL)
+                } else if let jpegData = dynamicJpeg(resizedImage, originSize) {
+                    try? jpegData.write(to: outputURL)
+                } else if let pngData = resizedImage.pngData() {
+                    try? pngData.write(to: outputURL)
+                } else if let heicData = resizedImage.heicData() {
+                    try? heicData.write(to: outputURL)
+                } else {
+                    try? inputData.write(to: outputURL)
+                }
             } else {
                 try? inputData.write(to: outputURL)
             }
@@ -103,9 +113,9 @@ class FImageUtils {
 
         return outputURL
     }
-    static func urlToFile(_ fileUrl: String, _ fileName: String) -> URL {
+    static func urlToFile(_ fileUrl: String, _ fileName: String, _ originSize: Int) -> URL {
         let fileURL = URL(fileURLWithPath: fileUrl)
-        return urlToFile(fileURL, fileName)
+        return urlToFile(fileURL, fileName, originSize)
     }
     static func urlToGifFile(_ fileUrl: URL, _ fileName: String) -> URL {
         let fileManager = FileManager.default
@@ -127,45 +137,64 @@ class FImageUtils {
         let fileURL = URL(fileURLWithPath: fileUrl)
         return urlToGifFile(fileURL, fileName)
     }
-
-    static func resizeImage(_ image: UIImage, _ targetSize: CGSize) -> UIImage? {
+    static func encodeToWebP(_ image: UIImage, _ originSize: Int) -> Data? {
         guard let cgImage = image.cgImage else { return nil }
-        var format = vImage_CGImageFormat(
-            bitsPerComponent: 8,
-            bitsPerPixel: 32,
-            colorSpace: Unmanaged.passUnretained(CGColorSpaceCreateDeviceRGB()),
-            bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue),
-            version: 0,
-            decode: nil,
-            renderingIntent: .defaultIntent
-        )
-        var sourceBuffer = vImage_Buffer()
-        defer { free(sourceBuffer.data) }
+        let width = Int32(cgImage.width)
+        let height = Int32(cgImage.height)
+        let targetSize = FConstants.MAX_FILE_SIZE > originSize ? originSize : FConstants.MAX_FILE_SIZE
+        var quality: Float = 75.0
+        guard let dataProvider = cgImage.dataProvider,
+              let pixelData = dataProvider.data as Data? else { return nil }
+        let bytesPerRow = Int32(cgImage.bytesPerRow)
+        while quality > 10.0 {
+            var outputData: UnsafeMutablePointer<UInt8>? = nil
+            var outputSize: Int = 0
+            
+            pixelData.withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) in
+                if let baseAddress = rawBufferPointer.baseAddress {
+                    outputSize = WebPEncodeRGBA(baseAddress.assumingMemoryBound(to: UInt8.self),
+                                                width,
+                                                height,
+                                                bytesPerRow,
+                                                quality,
+                                                &outputData)
+                }
+            }
+            
+            if let outputPointer = outputData, outputSize > 0 {
+                let webpData = Data(bytes: outputPointer, count: outputSize)
+                free(outputPointer) // 메모리 해제
 
-        var error = vImageBuffer_InitWithCGImage(&sourceBuffer, &format, nil, cgImage, vImage_Flags(kvImageNoFlags))
-        guard error == kvImageNoError else { return nil }
-
-        let scale = UIScreen.main.scale
-        let destWidth = Int(targetSize.width * scale)
-        let destHeight = Int(targetSize.height * scale)
-        let bytesPerPixel = 4
-        let destBytesPerRow = destWidth * bytesPerPixel
-
-        guard let destData = malloc(destHeight * destBytesPerRow) else { return nil }
-        var destBuffer = vImage_Buffer(data: destData, height: vImagePixelCount(destHeight), width: vImagePixelCount(destWidth), rowBytes: destBytesPerRow)
-
-        error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, nil, vImage_Flags(kvImageHighQualityResampling))
-        guard error == kvImageNoError else {
-            free(destBuffer.data)
-            return nil
+                if webpData.count <= targetSize {
+                    return webpData
+                }
+            }
+            
+            quality -= 5.0
         }
-        guard let resizedCGImage = vImageCreateCGImageFromBuffer(&destBuffer, &format, nil, nil, vImage_Flags(kvImageNoAllocate), &error)?.takeRetainedValue(),
-              error == kvImageNoError else {
-            free(destBuffer.data)
-            return nil
+        
+        return nil
+    }
+    static func dynamicJpeg(_ image: UIImage, _ originSize: Int) -> Data? {
+        var qulity = CGFloat(0.7)
+        var ret = image.jpegData(compressionQuality: qulity)
+        let targetSize = FConstants.MAX_FILE_SIZE > originSize ? originSize : FConstants.MAX_FILE_SIZE
+        while let data = ret, data.count > targetSize, qulity > 0.1 {
+            qulity -= 0.1
+            ret = image.jpegData(compressionQuality: qulity)
         }
-
-        return UIImage(cgImage: resizedCGImage, scale: scale, orientation: image.imageOrientation)
+        return ret
+    }
+    static func resizeImage(_ image: UIImage, _ targetSize:CGSize) -> UIImage? {
+        let size = calcResize(targetSize)
+        if size.width >= targetSize.width && size.height >= targetSize.height {
+            return image
+        }
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let resizedImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+        return resizedImage
     }
 
     static func fixImageOrientation(_ image: UIImage) -> UIImage {
@@ -178,6 +207,18 @@ class FImageUtils {
         let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return normalizedImage
+    }
+    static func calcResize(_ size: CGSize, _ limitSize: Float = 2500) -> CGSize {
+        let limit = CGFloat(limitSize)
+        let height = size.height
+        let width = size.width
+        var inSampleSize = 1.0
+        if height > limit || width > limit {
+            let heightRatio = height / limit
+            let widthRatio = width / limit
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio
+        }
+        return CGSize(width: CGFloat(width * inSampleSize), height: CGFloat(height * inSampleSize))
     }
     
     @ViewBuilder

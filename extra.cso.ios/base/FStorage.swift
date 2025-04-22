@@ -9,7 +9,7 @@ class FStorage {
                 kSecAttrAccount as String: key,
             ]
 
-            SecItemDelete(query as CFDictionary) // 기존 값 제거
+            SecItemDelete(query as CFDictionary)
 
             let attributes: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,

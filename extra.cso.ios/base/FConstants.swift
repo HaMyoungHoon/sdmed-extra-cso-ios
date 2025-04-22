@@ -25,6 +25,8 @@ class FConstants {
     static let DEF_LONGITUDE = 126.76905
     static let DEF_ZOOM = 15.0
     
+    static let MAX_FILE_SIZE = 10 * 1024 * 1024
+    
     static let REGEX_NUMBER_REPLACE = "[^0-9]"
     static let REGEX_CHECK_PASSWORD_0 = "^(?=.*[A-Za-z가-힣ㄱ-하-ㅣ!@#$%^&*()])(?=.*\\d)[A-Za-z가-힣ㄱ-하-ㅣ\\d!@#$%^&*()]{8,20}$"
 }

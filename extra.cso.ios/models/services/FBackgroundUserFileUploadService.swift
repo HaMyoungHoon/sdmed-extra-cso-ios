@@ -169,7 +169,7 @@ class FBackgroundUserFileUploadService {
         }
         Task {
             guard let url = data.media.mediaUrl else { notificationCall(FAppLocalString.userFileUploadFail, "mediaUrl is null"); return }
-            let cachedFile = FImageUtils.urlToFile(url, data.media.mediaName)
+            let cachedFile = FImageUtils.urlToFile(url, data.media.mediaName, data.media.originSize)
             let ret = await azureBlobService.upload(data.userFileModel.blobUrlKey, cachedFile, data.userFileModel.mimeType)
             FImageUtils.fileDelete(cachedFile)
             FImageUtils.fileDelete(url)
@@ -243,7 +243,7 @@ class FBackgroundUserFileUploadService {
         }
         Task {
             guard let url = data.media.mediaUrl else { notificationCall(FAppLocalString.userFileUploadFail, "mediaUrl is null"); return }
-            let cachedFile = FImageUtils.urlToFile(url, data.media.mediaName)
+            let cachedFile = FImageUtils.urlToFile(url, data.media.mediaName, data.media.originSize)
             let ret = await azureBlobService.upload(data.userFileModel.blobUrlKey, cachedFile, data.userFileModel.mimeType)
             FImageUtils.fileDelete(cachedFile)
             FImageUtils.fileDelete(url)

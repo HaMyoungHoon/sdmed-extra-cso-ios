@@ -8,26 +8,41 @@ PODS:
   - GoogleMaps (9.4.0):
     - GoogleMaps/Maps (= 9.4.0)
   - GoogleMaps/Maps (9.4.0)
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
+    - libwebp/webp
+  - libwebp/mux (1.5.0):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
+    - libwebp/sharpyuv
   - MqttCocoaAsyncSocket (1.0.8)
 
 DEPENDENCIES:
   - CocoaMQTT (= 2.1.6)
   - Google-Maps-iOS-Utils (= 6.1.0)
   - GoogleMaps (= 9.4.0)
+  - libwebp (= 1.5.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - CocoaMQTT
     - Google-Maps-iOS-Utils
     - GoogleMaps
+    - libwebp
     - MqttCocoaAsyncSocket
 
 SPEC CHECKSUMS:
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
   Google-Maps-iOS-Utils: 0a484b05ed21d88c9f9ebbacb007956edd508a96
   GoogleMaps: 0608099d4870cac8754bdba9b6953db543432438
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
 
-PODFILE CHECKSUM: 373cbb4d2f59f453e03b5391187c297c4f1d4f67
+PODFILE CHECKSUM: 8158bba5365fd2d609542cb173a3d2f38689333f
 
 COCOAPODS: 1.16.2

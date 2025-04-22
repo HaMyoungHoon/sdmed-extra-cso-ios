@@ -110,8 +110,10 @@ struct TrainingCertificateDialog: FBaseView {
     func eventWatch() {
         FEventBus.ins.createEventChannel(UserFileUploadEvent.self)
             .sink { _ in
+                DispatchQueue.main.async {
+                    dataContext.uploadBuff = nil
+                }
                 getList()
-                dataContext.uploadBuff = nil
             }.store(in: &cancellables)
     }
     

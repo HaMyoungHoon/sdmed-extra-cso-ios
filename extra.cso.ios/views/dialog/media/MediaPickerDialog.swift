@@ -150,6 +150,7 @@ struct MediaPickerDialog: FBaseView {
             let requestOptions = PHImageRequestOptions()
 //            requestOptions.deliveryMode = .fastFormat
             requestOptions.isSynchronous = false
+            requestOptions.isNetworkAccessAllowed = false
             var ret: [MediaPickerSourceBuffModel] = []
             assets.enumerateObjects { (asset, _, _) in
                 let subtype = asset.mediaSubtypes

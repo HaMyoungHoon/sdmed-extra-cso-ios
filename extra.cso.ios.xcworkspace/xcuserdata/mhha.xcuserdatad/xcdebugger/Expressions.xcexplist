@@ -38,10 +38,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static FImageUtils.dynamicJpeg(_:_:):FImageUtils.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ret?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "UserTrainingFileAzureQueueModel.parse(_:_:):UserTrainingFileAzureQueueModel.swift">
          <PersistentStrings>
             <PersistentString
                value = "userFileModel.blobUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static FImageUtils.urlToFile(_:_:):FImageUtils.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "inputData.webpData()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

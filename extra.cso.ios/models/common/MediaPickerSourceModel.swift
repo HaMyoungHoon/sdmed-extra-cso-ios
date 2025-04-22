@@ -7,6 +7,7 @@ class MediaPickerSourceModel {
     var mediaFileType: MediaFileType = MediaFileType.UNKNOWN
     var mediaDateTime: String = ""
     var mediaMimeType: String = ""
+    var originSize: Int = 0
     
     func apply(_ block: (Self) -> Void) -> Self {
         block(self)
@@ -15,8 +16,6 @@ class MediaPickerSourceModel {
     
     func parse(_ data: MediaPickerSourceBuffModel?) async -> MediaPickerSourceModel? {
         guard let data = data else { return nil }
-        mediaFileType = MediaFileType.parse(data.asset.mediaType)
-        mediaDateTime = FDateTime().setThis(data.asset.creationDate).toString()
         guard let resource = PHAssetResource.assetResources(for: data.asset).first else {
             return nil
         }
@@ -25,14 +24,26 @@ class MediaPickerSourceModel {
         mediaUrl = outputURL
         mediaName = resource.originalFilename
         mediaMimeType = FContentsType.findContentType(mediaName)
+        mediaFileType = MediaFileType.parse(data.asset.mediaType)
+        mediaDateTime = FDateTime().setThis(data.asset.creationDate).toString()
         return await withCheckedContinuation { continuation in
-            PHAssetResourceManager.default().writeData(for: resource, toFile: outputURL, options: nil) { error in
+            let options = PHAssetResourceRequestOptions()
+            options.isNetworkAccessAllowed = false
+            PHAssetResourceManager.default().requestData(for: resource, options: options, dataReceivedHandler: { data in
+                self.originSize += Int(data.count)
+            }, completionHandler: { error in
                 if let _ = error {
                     continuation.resume(returning: nil)
                 } else {
-                    continuation.resume(returning: self.mediaUrl == nil ? nil : self)
+                    PHAssetResourceManager.default().writeData(for: resource, toFile: outputURL, options: nil) { error in
+                        if let _ = error {
+                            continuation.resume(returning: nil)
+                        } else {
+                            continuation.resume(returning: self.mediaUrl == nil ? nil : self)
+                        }
+                    }
                 }
-            }
+            })
         }
     }
 }
