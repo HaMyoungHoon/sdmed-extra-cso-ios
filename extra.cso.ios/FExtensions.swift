@@ -141,7 +141,7 @@ extension Bool {
 extension Character {
     var toInt: Int {
         guard let ret = unicodeScalars.first else {
-            FException.FFatal.notDefined("illegal character unicodeScalars.first is nil")
+            FException.FFatal.notDefined("illegal character unicodeScalars.first is null")
             return 0
         }
         return Int(ret.value)

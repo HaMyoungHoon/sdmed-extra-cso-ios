@@ -1,4 +1,4 @@
-class EDIFileResultQueueModel {
+class EDIFileResultQueueModel: Equatable {
     var uuid: String = ""
     var ediPK: String = ""
     var ediPharmaPK: String = ""
@@ -20,5 +20,9 @@ class EDIFileResultQueueModel {
     }
     func parseEDIUploadModel() -> EDIUploadModel {
         return ediUploadModel
+    }
+    
+    static func == (lhs: EDIFileResultQueueModel, rhs: EDIFileResultQueueModel) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

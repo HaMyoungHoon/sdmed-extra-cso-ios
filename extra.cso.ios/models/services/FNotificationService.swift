@@ -18,7 +18,7 @@ class FNotificationService {
             self.sendNotification(ret)
         }
     }
-    func sendNotify(_ notifyIndex: NotifyIndex, _ title: String, _ content: String = "", _ notifyType: NotifyType = NotifyType.DEFAULT, _ isCancel: Bool = false, _ thisPK: String = "") {
+    func sendNotify(_ notifyIndex: NotifyIndex, _ title: String, _ content: String = "", _ thisPK: String = "", _ notifyType: NotifyType = NotifyType.DEFAULT) {
         checkPermission {
             let ret = self.createNotification(title, content, notifyType)
             self.sendNotification(ret, notifyIndex, thisPK)
@@ -87,12 +87,5 @@ class FNotificationService {
         }
         
         return notify
-    }
-    
-    enum NotifyType: Int, CaseIterable {
-        case DEFAULT = 1
-        case WITH_SOUND = 2
-        case WITH_VIBRATE = 3
-        case WITH_S_V = 4
     }
 }

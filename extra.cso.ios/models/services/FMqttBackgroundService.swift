@@ -21,6 +21,12 @@ class FMqttBackgroundService {
         }
     }
     
+    func mqttDisconnect() {
+        if client?.connState != CocoaMQTTConnState.connected {
+            return
+        }
+        client?.disconnect()
+    }
     func mqttConnect(_ mqttConnectModel: MqttConnectModel) {
         if client?.connState == CocoaMQTTConnState.connected {
             return
@@ -72,12 +78,58 @@ class FMqttBackgroundService {
         _ = client.connect()
     }
     func mqtt5(_ mqtt: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16) {
-        
+        parsePublish(message)
     }
     func parsePublish(_ data: CocoaMQTT5Message) {
         let mqttContentModel = MqttContentModel().parseThis(data.topic, data.payload)
         if mqttContentModel.senderPK == FAmhohwa.getThisPK() {
             return
+        }
+        
+        let title: String
+        let notifyIndex: NotifyIndex
+        let content = mqttContentModel.content
+        let targetPK = mqttContentModel.targetItemPK
+        switch mqttContentModel.contentType {
+        case MqttContentType.None:
+            title = FAppLocalString.mqttTitleNone
+            notifyIndex = NotifyIndex.UNKNOWN
+            break
+        case MqttContentType.QNA_REPLY:
+            title = FAppLocalString.mqttTitleQnaReply
+            notifyIndex = NotifyIndex.QNA_RESPONSE
+            break
+        case MqttContentType.EDI_REJECT:
+            title = FAppLocalString.mqttTitleEdiReject
+            notifyIndex = NotifyIndex.EDI_RESPONSE
+            break
+        case MqttContentType.EDI_OK:
+            title = FAppLocalString.mqttTitleEdiOk
+            notifyIndex = NotifyIndex.EDI_RESPONSE
+            break
+        case MqttContentType.EDI_RECEP:
+            title = FAppLocalString.mqttTitleEdiRecep
+            notifyIndex = NotifyIndex.EDI_RESPONSE
+            break
+        case MqttContentType.EDI_FILE_DELETE:
+            title = FAppLocalString.mqttTitleEdiDelete
+            notifyIndex = NotifyIndex.EDI_FILE_REMOVE
+            break
+        case MqttContentType.USER_FILE_ADD:
+            title = FAppLocalString.mqttTitleUserFile
+            notifyIndex = NotifyIndex.USER_FILE_UPLOAD
+            break
+        default: return
+        }
+        switch mqttContentModel.contentType {
+        case MqttContentType.None: notificationService.sendNotify(title, content)
+        case MqttContentType.QNA_REPLY: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        case MqttContentType.EDI_REJECT: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        case MqttContentType.EDI_OK: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        case MqttContentType.EDI_RECEP: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        case MqttContentType.EDI_FILE_DELETE: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        case MqttContentType.USER_FILE_ADD: notificationService.sendNotify(notifyIndex, title, content, targetPK)
+        default: return
         }
     }
 }

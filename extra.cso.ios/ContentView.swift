@@ -10,6 +10,7 @@ struct ContentView: View {
             contentView().environmentObject(appState)
         }.onAppear {
             FDI.notificationService.checkPermission()
+            appState.checkVersion()
         }
     }
     var loadingView: some View {

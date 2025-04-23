@@ -1,4 +1,4 @@
-class QnAResultQueueModel {
+class QnAResultQueueModel: Equatable {
     var uuid: String = ""
     var qnaPK: String = ""
     var currentMedia: QnAFileModel = QnAFileModel()
@@ -40,5 +40,8 @@ class QnAResultQueueModel {
             })
         }
         return ret
+    }
+    static func == (lhs: QnAResultQueueModel, rhs: QnAResultQueueModel) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

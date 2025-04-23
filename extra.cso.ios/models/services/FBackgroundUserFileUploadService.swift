@@ -42,7 +42,9 @@ class FBackgroundUserFileUploadService {
         if let findBuff = resultQ.findQ(false, { $0.uuid == data.uuid }) {
             findBuff.appendItemPath(data.currentMedia, data.itemIndex)
         } else {
-            resultQ.enqueue(data, false)
+            if data.itemIndex == -1 {
+                resultQ.enqueue(data, false)
+            }
         }
         resultThreadStart(resultQRun)
         resultQRun = true
@@ -53,7 +55,9 @@ class FBackgroundUserFileUploadService {
         if let findBuff = resultTrainingQ.findQ(false, { $0.uuid == data.uuid }) {
             findBuff.setThis(data)
         } else {
-            resultTrainingQ.enqueue(data, false)
+            if data.trainingDate.isEmpty {
+                resultTrainingQ.enqueue(data, false)
+            }
         }
         resultTrainingThreadStart(resultQRun)
         resultTrainingQRun = true
@@ -72,6 +76,13 @@ class FBackgroundUserFileUploadService {
         resultQ.unlocking()
         return ret
     }
+    private func resultBreak(_ uuid: String) {
+        resultQ.locking()
+        if let retBuff = resultQ.findQ(false, { $0.uuid == uuid }) {
+            _ = resultQ.removeQ(retBuff, false)
+        }
+        resultQ.unlocking()
+    }
     private func resultTrainingDequeue() -> UserTrainingFileResultQueueModel {
         resultTrainingQ.locking()
         let ret: UserTrainingFileResultQueueModel
@@ -84,6 +95,13 @@ class FBackgroundUserFileUploadService {
         }
         resultTrainingQ.unlocking()
         return ret
+    }
+    private func resultTrainingBreak(_ uuid: String) {
+        resultTrainingQ.locking()
+        if let retBuff = resultTrainingQ.findQ(false, { $0.uuid == uuid }) {
+            _ = resultTrainingQ.removeQ(retBuff, false)
+        }
+        resultTrainingQ.unlocking()
     }
     private func sasKeyThreadStart() {
         sasKeyQ.threadStart {
@@ -137,7 +155,7 @@ class FBackgroundUserFileUploadService {
         Task {
             let ret = await commonService.postGenerateSasList(blobName.map { $0.1 })
             guard let retData = ret.data,
-                  let retResult = ret.result, retResult != true else {
+                  let retResult = ret.result, retResult == true else {
                       notificationCall(FAppLocalString.userFileUploadFail, ret.msg)
                       return
             }
@@ -183,6 +201,7 @@ class FBackgroundUserFileUploadService {
             } else {
                 progressNotificationCall(data.uuid, true)
                 notificationCall(FAppLocalString.userFileUploadFail)
+                resultBreak(data.uuid)
             }
         }
     }
@@ -256,6 +275,7 @@ class FBackgroundUserFileUploadService {
             } else {
                 progressNotificationCall(data.uuid, true)
                 notificationCall(FAppLocalString.userFileUploadFail)
+                resultTrainingBreak(data.uuid)
             }
         }
     }
@@ -276,7 +296,7 @@ class FBackgroundUserFileUploadService {
         }
     }
     private func notificationCall(_ title: String, _ message: String? = nil, _ thisPK: String = "") {
-        notificationService.sendNotify(NotifyIndex.USER_FILE_UPLOAD, title, message ?? "", FNotificationService.NotifyType.WITH_VIBRATE, true, thisPK)
+        notificationService.sendNotify(NotifyIndex.USER_FILE_UPLOAD, title, message ?? "", thisPK)
         FEventBus.ins.emit(UserFileUploadEvent(thisPK))
     }
     private func progressNotificationCall(_ uuid: String, _ isCancel: Bool = false) {

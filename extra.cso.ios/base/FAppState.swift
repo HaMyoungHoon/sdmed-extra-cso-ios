@@ -15,10 +15,6 @@ class FAppState: ObservableObject {
     @Published var updateVisible: Bool = false
     @AppStorage(FConstants.NOTIFY_INDEX) var notifyIndex: Int = 0
     
-    init() {
-        checkVersion()
-    }
-    
     func checkVersion() {
         loading()
         Task {
@@ -42,7 +38,11 @@ class FAppState: ObservableObject {
                 FAmhohwa.tokenRefresh { ret in
                     self.loading(false)
                     self.launchState = FRestVariable.ins.tokenValid ? LaunchState.Authenticated : LaunchState.Launching
-                    self.mqttInit()
+                    if ret.result == true {
+                        self.mqttReInit()
+                    } else {
+                        self.mqttDisconnect()
+                    }
                 }
             } else {
                 self.launchState = FRestVariable.ins.tokenValid ? LaunchState.Authenticated : LaunchState.Launching
@@ -52,13 +52,22 @@ class FAppState: ObservableObject {
     }
     func updateToken() {
         self.launchState = FRestVariable.ins.tokenValid ? LaunchState.Authenticated : LaunchState.Launching
-        mqttInit()
+        mqttReInit()
     }
     
     private func mqttInit() {
         Task {
             await FDI.mqttBackgroundService.mqttInit()
         }
+    }
+    private func mqttReInit() {
+        Task {
+            FDI.mqttBackgroundService.mqttDisconnect()
+            await FDI.mqttBackgroundService.mqttInit()
+        }
+    }
+    private func mqttDisconnect() {
+        FDI.mqttBackgroundService.mqttDisconnect()
     }
     
     func loading(_ isVisible: Bool = true) {

@@ -11,6 +11,9 @@ class FServiceFactory {
     static func createEDIListService(_ url: String = "\(FConstants.REST_API_URL)/\(FConstants.REST_API_EDI_LIST)") -> PEDIListRepository {
         return EDIListService(url)
     }
+    static func createEDIRequestService(_ url: String = "\(FConstants.REST_API_URL)/\(FConstants.REST_API_EDI_REQUEST)") -> PEDIRequestRepository {
+        return EDIRequestService(url)
+    }
     static func createHospitalTempService(_ url: String = "\(FConstants.REST_API_URL)/\(FConstants.REST_API_HOSPITAL_TEMP)") -> PHospitalTempRepository {
         return HospitalTempService(url)
     }
@@ -34,6 +37,18 @@ class FServiceFactory {
         return mqttBackgroundService
     }
     
+    static func createBackgroundEDIFileUploadService() -> FBackgroundEDIFileUploadService {
+        return backgroundEDIFileUploadService
+    }
+    static func createBackgroundEDIRequestNewUploadService() -> FBackgroundEDIRequestNewUploadService {
+        return backgroundEDIRequestNewUploadService
+    }
+    static func createBackgroundEDIRequestUploadService() -> FBackgroundEDIRequestUploadService {
+        return backgroundEDIRequestUploadService
+    }
+    static func createBackgroundQnAUploadService() -> FBackgroundQnAUploadService {
+        return backgroundQnAUploadService
+    }
     static func createBackgroundUserFileUploadService() -> FBackgroundUserFileUploadService {
         return backgroundUserFileUploadService
     }
@@ -41,5 +56,9 @@ class FServiceFactory {
     static private let notificationService = FNotificationService()
     static private let mqttBackgroundService = FMqttBackgroundService()
     
+    static private let backgroundEDIFileUploadService = FBackgroundEDIFileUploadService()
+    static private let backgroundEDIRequestNewUploadService = FBackgroundEDIRequestNewUploadService()
+    static private let backgroundEDIRequestUploadService = FBackgroundEDIRequestUploadService()
+    static private let backgroundQnAUploadService = FBackgroundQnAUploadService()
     static private let backgroundUserFileUploadService = FBackgroundUserFileUploadService()
 }
