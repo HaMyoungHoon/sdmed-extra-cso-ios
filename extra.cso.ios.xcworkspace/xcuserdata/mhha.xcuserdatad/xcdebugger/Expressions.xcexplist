@@ -143,6 +143,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FMqttBackgroundService.mqttConnect(_:):FMqttBackgroundService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "connectState">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FallbackDataClass.init(from:):FallbackDataClass.swift">
          <PersistentStrings>
             <PersistentString
@@ -195,6 +203,9 @@
                value = "dataBuff.isOpen">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FMqttBackgroundService.mqttInit():FMqttBackgroundService.swift">
       </ContextState>
       <ContextState
          contextName = "MediaViewListDialogVM.originalFilename.getter:MediaViewListDialogVM.swift">

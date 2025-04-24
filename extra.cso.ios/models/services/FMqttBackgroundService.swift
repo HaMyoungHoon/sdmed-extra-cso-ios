@@ -1,7 +1,33 @@
 import Foundation
 import CocoaMQTT
 
-class FMqttBackgroundService {
+class FMqttBackgroundService: CocoaMQTT5Delegate {
+    func mqtt5(_ mqtt5: CocoaMQTT5, didConnectAck ack: CocoaMQTTCONNACKReasonCode, connAckData: MqttDecodeConnAck?) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishMessage message: CocoaMQTT5Message, id: UInt16) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishAck id: UInt16, pubAckData: MqttDecodePubAck?) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishRec id: UInt16, pubRecData: MqttDecodePubRec?) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16, publishData: MqttDecodePublish?) {
+        self.parsePublish(message)
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didSubscribeTopics success: NSDictionary, failed: [String], subAckData: MqttDecodeSubAck?) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didUnsubscribeTopics topics: [String], unsubAckData: MqttDecodeUnsubAck?) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveDisconnectReasonCode reasonCode: CocoaMQTTDISCONNECTReasonCode) {
+    }
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode) {
+    }
+    func mqtt5DidPing(_ mqtt5: CocoaMQTT5) {
+    }
+    func mqtt5DidReceivePong(_ mqtt5: CocoaMQTT5) {
+    }
+    func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: (any Error)?) {
+    }
+    
     let notificationService = FDI.notificationService
     let mqttService = FDI.mqttService
     var client: CocoaMQTT5? = nil
@@ -32,7 +58,7 @@ class FMqttBackgroundService {
             return
         }
         let clientID = "ios-extra-cso/\(UUID().uuidString)"
-        guard let brokerBuff = mqttConnectModel.brokerUrl.first(where: { $0.contains("tc") || $0.contains("tcp") }) else {
+        guard let brokerBuff = mqttConnectModel.brokerUrl.first(where: { $0.contains("tcp") }) else {
             return
         }
 
@@ -65,20 +91,18 @@ class FMqttBackgroundService {
             return
         }
         client.connectProperties = connectProperties
-
+        client.enableSSL = false
+        client.allowUntrustCACertificate = true
         client.username = mqttConnectModel.userName
         client.password = mqttConnectModel.password
-        for topic in mqttConnectModel.topic {
-            client.subscribe(topic, qos: .qos1)
-        }
         client.keepAlive = 60
-        client.didReceiveMessage = { mqtt, message, id, decode in
-            self.parsePublish(message)
+        client.didConnectAck = { mqtt, code, ack in
+            for topic in mqttConnectModel.topic {
+                client.subscribe(topic, qos: .qos1)
+            }
         }
+        client.delegate = self
         _ = client.connect()
-    }
-    func mqtt5(_ mqtt: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16) {
-        parsePublish(message)
     }
     func parsePublish(_ data: CocoaMQTT5Message) {
         let mqttContentModel = MqttContentModel().parseThis(data.topic, data.payload)
