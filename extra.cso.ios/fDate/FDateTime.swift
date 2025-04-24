@@ -176,7 +176,7 @@ public class FDateTime {
         return self
     }
     func setThis(_ data: String?, _ localize: FLocalize = FLocalize.KOREA) -> FDateTime {
-        guard let dataBuff = data else {
+        guard let dataBuff = data, dataBuff.isEmpty == false else {
             return self
         }
         self._localize = localize
@@ -200,10 +200,10 @@ public class FDateTime {
 
         return Int64(daysToYear(year) + days[month - 1] + day - 1) * Int64(_ticksPerDay)
     }
-    func toString(_ format: String? = "yyyy-MM-dd") -> String {
+    func toString(_ format: String? = nil) -> String {
         return FDateTimeFormat.ins.format(self, format, _localize)
     }
-    func toString(_ format: String? = "yyyy-MM-dd", _ localize: FLocalize) -> String {
+    func toString(_ format: String? = nil, _ localize: FLocalize) -> String {
         return FDateTimeFormat.ins.format(self, format, localize)
     }
     func toDate() -> Date {

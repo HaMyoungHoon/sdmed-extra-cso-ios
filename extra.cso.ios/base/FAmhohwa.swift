@@ -100,6 +100,10 @@ class FAmhohwa {
         }
         return new >= previous
     }
+    static func logout() {
+        removeLoginData()
+        FStorage.logoutMultiLoginData()
+    }
     static func addLoginData() {
         FStorage.addMultiLoginData(UserMultiLoginModel().apply {
             $0.thisPK = getThisPK()

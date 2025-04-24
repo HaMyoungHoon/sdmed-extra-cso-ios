@@ -7,8 +7,8 @@ struct MediaPickerDialog: FBaseView {
     @Environment(\.dismiss) var dismiss
     @StateObject var dataContext: MediaPickerDialogVM
     var onSelect: (([MediaPickerSourceBuffModel]) -> Void)?
-    init(_ appState: FAppState, _ onSelect: (([MediaPickerSourceBuffModel]) -> Void)? = nil, _ maxItemCount: Int = 0) {
-        _dataContext = StateObject(wrappedValue: MediaPickerDialogVM(appState, maxItemCount))
+    init(_ appState: FAppState, _ onSelect: (([MediaPickerSourceBuffModel]) -> Void)? = nil, _ maxItemCount: Int = 0, _ clickBuff: [MediaPickerSourceBuffModel] = []) {
+        _dataContext = StateObject(wrappedValue: MediaPickerDialogVM(appState, maxItemCount, clickBuff))
         self.onSelect = onSelect
     }
     
@@ -169,6 +169,7 @@ struct MediaPickerDialog: FBaseView {
             }
             DispatchQueue.main.async {
                 dataContext.items = ret
+                parsePreviousClickItem()
             }
         }
     }
@@ -204,5 +205,14 @@ struct MediaPickerDialog: FBaseView {
                 dataContext.appendClickedItem(item)
             }
         }
+    }
+    func parsePreviousClickItem() {
+        var ret: [MediaPickerSourceBuffModel] = []
+        dataContext.clickItemBuff.forEach { x in
+            if let buff = dataContext.items.first(where: { $0.asset == x.asset }) {
+                ret.append(buff)
+            }
+        }
+        dataContext.resetClickedItem(ret)
     }
 }

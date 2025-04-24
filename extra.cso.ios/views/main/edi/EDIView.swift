@@ -22,6 +22,13 @@ struct EDIView: FBaseView {
             getList()
             eventWatch()
             checkStoragePK()
+        }.fullScreenCover(isPresented: Binding<Bool>(
+            get: { dataContext.selectedItem != nil },
+            set: { _ in dataContext.selectedItem = nil }
+        )) {
+            if let selectedItem = dataContext.selectedItem {
+                EDIDetailView(dataContext.appState, selectedItem)
+            }
         }
     }
     var topContainer: some View {
@@ -95,9 +102,12 @@ struct EDIView: FBaseView {
                 .background(item.ediBackColor)
                 .foregroundColor(item.ediColor)
                 .cornerRadius(5)
-            }.onTapGesture {
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
                 item.onClick(ExtraEDIListResponse.ClickEvent.OPEN, ExtraEDIListResponse.self)
             }
+            .background(dataContext.selectedItem == item.thisPK ? FAppColor.buttonBackground : FAppColor.transparent)
         }
     }
     
@@ -109,6 +119,9 @@ struct EDIView: FBaseView {
     }
     func checkStoragePK() {
         let ediPK = FStorage.getNotifyPK()
+        if !ediPK.isEmpty {
+            openEDIItem(ediPK)
+        }
         FStorage.removeNotifyPK()
     }
     
@@ -136,6 +149,7 @@ struct EDIView: FBaseView {
               let dataBuff = array[1] as? ExtraEDIListResponse else { return }
         switch eventName {
         case ExtraEDIListResponse.ClickEvent.OPEN:
+            openEDIItem(dataBuff)
             break
         }
     }
@@ -155,5 +169,12 @@ struct EDIView: FBaseView {
                 dataContext.toast(ret.msg)
             }
         }
+    }
+    
+    func openEDIItem(_ thisPK: String) {
+        dataContext.selectedItem = thisPK
+    }
+    func openEDIItem(_ data: ExtraEDIListResponse) {
+        dataContext.selectedItem = data.thisPK
     }
 }

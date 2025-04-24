@@ -7,7 +7,7 @@ class EDIViewVM: FBaseViewModel {
     @Published var endDate: Date = Date()
     @Published var startDateSelect = false
     @Published var endDateSelect = false
-    @Published var selectedItem: ExtraEDIListResponse? = nil
+    @Published var selectedItem: String? = nil
     
     override init(_ appState: FAppState) {
         super.init(appState)

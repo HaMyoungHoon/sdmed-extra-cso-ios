@@ -4,7 +4,7 @@ public class FDateTimeFormat {
     static let ins = FDateTimeFormat()
     let maxSecondsFractionDigits = 7
     func format(_ dateTime: FDateTime, _ format: String? = nil, _ localize: FLocalize = FLocalize.KOREA) -> String {
-        let parseFormatter = (format != nil) ? (format?.isEmpty == false ? format! : localize.getDateTimeOffset()) : localize.getDateTimeOffset()
+        let parseFormatter = (format != nil) ? (format?.isEmpty == false ? format! : localize.getDateOffset()) : localize.getDateOffset()
         return formatCustomized(dateTime, parseFormatter, localize)
     }
     func formatCustomized(_ dateTime: FDateTime, _ format: String, _ localize: FLocalize) -> String {

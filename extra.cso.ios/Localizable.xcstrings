@@ -1490,6 +1490,17 @@
         }
       }
     },
+    "next_desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "next"
+          }
+        }
+      }
+    },
     "open_desc" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1741,6 +1752,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "약국토글"
+          }
+        }
+      }
+    },
+    "prev_desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "prev"
           }
         }
       }
@@ -2227,7 +2249,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "training certi add"
+            "value" : "train cert add"
           }
         },
         "ko" : {

@@ -13,6 +13,10 @@ enum FAppColor {
     static let backdrop = Color("#FFFFFF", 0.25)
     static let modalBackground = Color("#121212", 0.6)
     
+    static let cardBackground1 = Color("cardBackground1")
+    static let cardBackground2 = Color("cardBackground2")
+    static let cardParagraph1 = Color("cardParagraph1")
+    static let cardParagraph2 = Color("cardParagraph2")
     static let buttonForeground = Color("buttonForeground")
     static let buttonBackground = Color("buttonBackground")
     static let disableForeground = Color("disableForeground")

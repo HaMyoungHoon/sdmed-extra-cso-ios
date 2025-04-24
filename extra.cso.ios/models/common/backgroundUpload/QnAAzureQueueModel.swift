@@ -17,7 +17,7 @@ class QnAAzureQueueModel {
         qnaFileModel.blobName = blobInfo.blobName
         qnaFileModel.originalFilename = media.mediaName
         qnaFileModel.mimeType = media.mediaMimeType
-        qnaFileModel.regDate = FExtensions.ins.getToday().toString()
+        qnaFileModel.regDate = FExtensions.ins.getToday().toString("yyyy-MM-dd")
         return self
     }
 }

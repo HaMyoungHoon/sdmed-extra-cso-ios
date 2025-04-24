@@ -7,6 +7,9 @@ class FDataModelClass<T> where T: CaseIterable {
         relayCommand?.execute([eventName, self as! T1])
         return true
     }
+    open func onClick(_ eventName: T, _ item: Any) {
+        relayCommand?.execute([eventName, item])
+    }
     
     open func apply<T1>(_ block: (T1) -> Void) -> T1 {
         block(self as! T1)

@@ -7,7 +7,7 @@ class ExtraEDIResponse: FDataModelClass<ExtraEDIResponse.ClickEvent>, Decodable,
     @FallbackString var pharmaName: String
     @FallbackString var etc: String
     @FallbackEnum var ediState: EDIState
-    @FallbackString var regDate: String
+    @FallbackDate var regDate: Date
     
     @Published var isOpen = false
     var responseDate: String {
@@ -21,7 +21,7 @@ class ExtraEDIResponse: FDataModelClass<ExtraEDIResponse.ClickEvent>, Decodable,
         _pharmaName.wrappedValue = ""
         _etc.wrappedValue = ""
         _ediState.wrappedValue = EDIState.None
-        _regDate.wrappedValue = ""
+        _regDate.wrappedValue = Date()
     }
     
     enum CodingKeys: String, CodingKey {

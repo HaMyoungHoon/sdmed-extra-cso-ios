@@ -19,7 +19,7 @@ class EDIAzureQueueModel {
         ediPharmaFileUploadModel.blobName = blobInfo.blobName
         ediPharmaFileUploadModel.originalFilename = media.mediaName
         ediPharmaFileUploadModel.mimeType = media.mediaMimeType
-        ediPharmaFileUploadModel.regDate = FExtensions.ins.getToday().toString()
+        ediPharmaFileUploadModel.regDate = FExtensions.ins.getToday().toString("yyyy-MM-dd")
         return self
     }
 }

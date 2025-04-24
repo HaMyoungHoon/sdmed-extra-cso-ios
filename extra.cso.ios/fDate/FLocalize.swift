@@ -59,13 +59,13 @@ open class FLocalize {
         if self === FLocalize.KOREA || self === FLocalize.KOREA_LUNA {
             return "yyyy-MM-dd hh:mm:ss (ddd)"
         }
-        return "MM-dd-yyyy hh:mm:ss (ddd)"
+        return "MM.dd.yyyy hh:mm:ss (ddd)"
     }
     func getDateOffset() -> String {
         if self === FLocalize.KOREA || self === FLocalize.KOREA_LUNA {
             return "yyyy-MM-dd"
         }
-        return "MM-dd-yyyy"
+        return "MM.dd.yyyy"
     }
 
     private func cvtLunarDay(_ solarDate: FDateTime) -> FDateTime {

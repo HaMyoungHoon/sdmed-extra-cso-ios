@@ -20,7 +20,7 @@ class UserTrainingModel: FDataModelClass<UserTrainingModel.ClickEvent>, Decodabl
     }
     
     var trainingDateString: String {
-        return FDateTime().setThis(trainingDate.timeIntervalSince1970).toString("yyyy-MM-dd")
+        return FDateTime().setThis(trainingDate.timeIntervalSince1970).toString()
     }
     
     enum CodingKeys: String, CodingKey {

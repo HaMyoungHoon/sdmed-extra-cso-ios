@@ -6,6 +6,7 @@ open class FBaseViewModel: ObservableObject {
     @Published var appState: FAppState
     var myState: UserStatus = UserStatus.None
     var commonService: PCommonRepository = FDI.commonService
+    var mqttBackground = FDI.mqttBackgroundService
     
     init(_ appState: FAppState) {
         self.appState = appState

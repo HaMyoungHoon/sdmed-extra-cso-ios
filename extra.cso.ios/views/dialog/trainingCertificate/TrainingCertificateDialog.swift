@@ -24,6 +24,13 @@ struct TrainingCertificateDialog: FBaseView {
             getList()
         }.fullScreenCover(isPresented: $dataContext.imageSelect) {
             MediaPickerDialog(dataContext.appState, { dataContext.setUploadBuff($0) }, 1)
+        }.fullScreenCover(isPresented: Binding<Bool>(
+            get: { dataContext.mediaViewModelIndex != nil },
+            set: { newValue in if !newValue { dataContext.mediaViewModelIndex = nil } }
+        )) {
+            if let index = dataContext.mediaViewModelIndex {
+                MediaViewListDialog(dataContext.appState, dataContext.getMediaList(), index)
+            }
         }
     }
     
@@ -104,6 +111,8 @@ struct TrainingCertificateDialog: FBaseView {
                     .foregroundColor(FAppColor.foreground)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }.frame(maxWidth: .infinity, alignment: .leading)
+        }.onTapGesture {
+            item.onClick(UserTrainingModel.ClickEvent.THIS, UserTrainingModel.self)
         }
     }
     
@@ -119,6 +128,7 @@ struct TrainingCertificateDialog: FBaseView {
     
     func onEvent(_ data: Any?) async {
         setThisCommand(data)
+        setItemCommand(data)
     }
     func setThisCommand(_ data: Any?) {
         guard let eventName = data as? TrainingCertificateDialogVM.ClickEvent else { return }
@@ -133,6 +143,16 @@ struct TrainingCertificateDialog: FBaseView {
             break
         case TrainingCertificateDialogVM.ClickEvent.SAVE:
             save()
+            break
+        }
+    }
+    func setItemCommand(_ data: Any?) {
+        guard let array = data as? [Any], array.count > 1,
+              let eventName = array[0] as? UserTrainingModel.ClickEvent,
+              let dataBuff = array[1] as? UserTrainingModel else { return }
+        switch eventName {
+        case UserTrainingModel.ClickEvent.THIS:
+            mediaListView(dataBuff)
             break
         }
     }
@@ -154,5 +174,8 @@ struct TrainingCertificateDialog: FBaseView {
         dataContext.toast(FAppLocalString.userFileUpload)
         dataContext.loading()
         dataContext.startBackground()
+    }
+    func mediaListView(_ data: UserTrainingModel) {
+        dataContext.mediaViewModelIndex = dataContext.trainingList.firstIndex(where: { $0.thisPK == data.thisPK })
     }
 }

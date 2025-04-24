@@ -12,7 +12,7 @@ class ExtraEDIPharma: FDataModelClass<ExtraEDIPharma.ClickEvent>, Decodable, PDe
     @FallbackEnum var ediState: EDIState
     @FallbackDataClass var fileList: [EDIUploadPharmaFileModel]
     
-    @Published var uploadItems: [MediaPickerSourceModel] = []
+    @Published var uploadItems: [MediaPickerSourceBuffModel] = []
     var isAddable: Bool {
         return ediState.isEditable()
     }
@@ -24,7 +24,9 @@ class ExtraEDIPharma: FDataModelClass<ExtraEDIPharma.ClickEvent>, Decodable, PDe
     var yearMonth: String {
         return "\(year)-\(month)"
     }
-    
+    func asdf() {
+        
+    }
     required override init () {
         _thisPK.wrappedValue = ""
         _ediPK.wrappedValue = ""
@@ -37,7 +39,7 @@ class ExtraEDIPharma: FDataModelClass<ExtraEDIPharma.ClickEvent>, Decodable, PDe
         _ediState.wrappedValue = EDIState.None
         _fileList.wrappedValue = []
     }
-    func toEDIUploadPharmaModel() -> EDIUploadPharmaModel {
+    func toEDIUploadPharmaModel() async -> EDIUploadPharmaModel {
         let ret = EDIUploadPharmaModel()
         ret.thisPK = thisPK
         ret.ediPK = ediPK
@@ -48,7 +50,13 @@ class ExtraEDIPharma: FDataModelClass<ExtraEDIPharma.ClickEvent>, Decodable, PDe
         ret.day = day
         ret.isCarriedOver = isCarriedOver
         ret.ediState = ediState
-        ret.uploadItems = uploadItems
+        var buff: [MediaPickerSourceModel] = []
+        for (_, x) in uploadItems.enumerated() {
+            if let item = await MediaPickerSourceModel().parse(x) {
+                buff.append(item)
+            }
+        }
+        ret.uploadItems = buff
         return ret
     }
     

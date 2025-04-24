@@ -8,7 +8,7 @@ class ExtraMyInfoResponse: Decodable {
     @FallbackString var companyNumber: String
     @FallbackString var bankAccount: String
     @FallbackString var csoReportNumber: String
-    @FallbackString var contractDate: String
+    @FallbackDateNil var contractDate: Date?
     @FallbackDate var regDate: Date
     @FallbackDate var lastLoginDate: Date
     @FallbackDataClass var hosList: [ExtraMyInfoHospital]
@@ -16,7 +16,7 @@ class ExtraMyInfoResponse: Decodable {
     @FallbackDataClass var trainingList: [UserTrainingModel]
     
     var lastLoginDateString: String {
-        return FDateTime().setThis(lastLoginDate.timeIntervalSince1970).toString("yyyy-MM-dd")
+        return FDateTime().setThis(lastLoginDate.timeIntervalSince1970).toString()
     }
     var taxPayerUrl: String? {
         return fileList.first { $0.userFileType == UserFileType.Taxpayer }?.blobUrl
@@ -69,10 +69,10 @@ class ExtraMyInfoResponse: Decodable {
             return ""
         }
         
-        return FDateTime().setThis(buff.timeIntervalSince1970).toString("yyyy-MM-dd")
+        return FDateTime().setThis(buff.timeIntervalSince1970).toString()
     }
     var contractDateString: String {
-        return FDateTime().setThis(_contractDate.wrappedValue).toString("yyyy-MM-dd")
+        return FDateTime().setThis(_contractDate.wrappedValue).toString()
     }
     
     enum CodingKeys: String, CodingKey {

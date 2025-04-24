@@ -76,7 +76,7 @@ class FBackgroundEDIFileUploadService {
             return
         }
         Task {
-            for (index, pharma) in data.ediUploadModel.pharmaList.enumerated() {
+            for (_, pharma) in data.ediUploadModel.pharmaList.enumerated() {
                 let uuid = UUID().uuidString
                 let resultQ = EDIFileResultQueueModel()
                 resultQ.uuid = uuid

@@ -154,7 +154,6 @@ struct PriceView: FBaseView {
                     getList()
                 }
                 dataContext.searchLoading = false
-                print("mhha \(newValue)")
             }
             .store(in: &cancellables)
     }

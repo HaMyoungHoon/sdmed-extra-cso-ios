@@ -3,10 +3,204 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "FallbackDate.init(from:):FallbackDate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ISO8601DateFormatter().date(from: string)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static FImageUtils.dynamicJpeg(_:_:):FImageUtils.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ret?.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FExtensions.getLocalize():FExtensions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Locale.current.language.languageCode?.identifier ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FBackgroundUserFileUploadService.checkSASKeyQ(_:):FBackgroundUserFileUploadService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in EDIDetailView.getData():EDIDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataContext.item.pharmaList[0].fileList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FBackgroundUserFileUploadService.postResultData(_:):FBackgroundUserFileUploadService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "data.media.regDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FDateTime2.getDay(_:_:):FDateTime2.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContentView.contentView():ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "appState.launchState">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ExtraMyInfoResponse.contractDateString.getter:ExtraMyInfoResponse.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_contractDate.wrappedValue">
+            </PersistentString>
+            <PersistentString
+               value = "contractDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in EDIView.topContainer.getter:EDIView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataContext.startDate">
+            </PersistentString>
+            <PersistentString
+               value = "dataContext.endDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ExtraEDIPharma.init(from:):ExtraEDIPharma.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "decoder.codingPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AsyncRelayCommand.isSafe():AsyncRelayCommand.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "_lastClickedTime">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EDIUploadPharmaFileModel.init(from:):EDIUploadPharmaFileModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static FImageUtils.urlToFile(_:_:):FImageUtils.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "inputData.webpData()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MediaPickerSourceModel.parse(_:):MediaPickerSourceModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mediaUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in EDIView.body.getter:EDIView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataContext.buff">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FAppDelegate.userNotificationCenter(_:didReceive:withCompletionHandler:):FAppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in MediaPickerDialog.getList():MediaPickerDialog.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "resource.value(forKey: &quot;locallyAvailable&quot;) as? Bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FallbackDataClass.init(from:):FallbackDataClass.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "decoder.codingPath">
+            </PersistentString>
+            <PersistentString
+               value = "try? T(from: decoder)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserTrainingFileAzureQueueModel.parse(_:_:):UserTrainingFileAzureQueueModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userFileModel.blobUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PageNumberModel.selectThis():PageNumberModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isSelect">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FBackgroundUserFileUploadService.resultTrainingDequeue():FBackgroundUserFileUploadService.swift">
          <PersistentStrings>
             <PersistentString
                value = "resultTrainingQ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PriceView.setPageNumberCommand(_:):PriceView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "array[1] as? PageNumberModel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "$defer #2 () in static FImageUtils.resizeImage(_:_:):FImageUtils.swift">
+      </ContextState>
+      <ContextState
+         contextName = "EDIDetailView.setPharmaCommand(_:):EDIDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dataBuff.isOpen">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MediaViewListDialogVM.originalFilename.getter:MediaViewListDialogVM.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "items.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,131 +216,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FallbackDate.init(from:):FallbackDate.swift">
+         contextName = "ExtraEDIPharma.isAddable.getter:ExtraEDIPharma.swift">
          <PersistentStrings>
             <PersistentString
-               value = "ISO8601DateFormatter().date(from: string)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FAppDelegate.userNotificationCenter(_:didReceive:withCompletionHandler:):FAppDelegate.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static FImageUtils.dynamicJpeg(_:_:):FImageUtils.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "ret?.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserTrainingFileAzureQueueModel.parse(_:_:):UserTrainingFileAzureQueueModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "userFileModel.blobUrl">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static FImageUtils.urlToFile(_:_:):FImageUtils.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "inputData.webpData()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in EDIView.body.getter:EDIView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "dataContext.buff">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in FBackgroundUserFileUploadService.postResultData(_:):FBackgroundUserFileUploadService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "data.media.regDate">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "AsyncRelayCommand.isSafe():AsyncRelayCommand.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "_lastClickedTime">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in FBackgroundUserFileUploadService.checkSASKeyQ(_:):FBackgroundUserFileUploadService.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in MediaPickerDialog.getList():MediaPickerDialog.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "resource.value(forKey: &quot;locallyAvailable&quot;) as? Bool">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ContentView.contentView():ContentView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "appState.launchState">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FExtensions.getLocalize():FExtensions.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Locale.current.language.languageCode?.identifier ">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PriceView.setPageNumberCommand(_:):PriceView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "array[1] as? PageNumberModel">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in EDIView.topContainer.getter:EDIView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "dataContext.endDate">
-            </PersistentString>
-            <PersistentString
-               value = "dataContext.startDate">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in MediaPickerSourceModel.parse(_:):MediaPickerSourceModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "mediaUrl">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "$defer #2 () in static FImageUtils.resizeImage(_:_:):FImageUtils.swift">
-      </ContextState>
-      <ContextState
-         contextName = "PageNumberModel.selectThis():PageNumberModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "isSelect">
+               value = "ediState.isEditable()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

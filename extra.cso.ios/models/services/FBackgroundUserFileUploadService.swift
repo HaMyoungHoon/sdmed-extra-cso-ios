@@ -7,12 +7,12 @@ class FBackgroundUserFileUploadService {
     var azureBlobService = FDI.azureBlobService
     var myInfoService = FDI.myInfoService
     
-    private let sasKeyQ = QueueLockModel<UserFileSASKeyQueueModel>("sasQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
-    private let azureQ = QueueLockModel<UserFileAzureQueueModel>("azureQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
-    private let resultQ = QueueLockModel<UserFileResultQueueModel>("resultQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
-    private let sasTrainingKeyQ = QueueLockModel<UserTrainingFileSASKeyQueueModel>("sasTrainingQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
-    private let azureTrainingQ = QueueLockModel<UserTrainingFileAzureQueueModel>("azureTrainingQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
-    private let resultTrainingQ = QueueLockModel<UserTrainingFileResultQueueModel>("resultTrainingQ \(FExtensions.ins.getToday().toString("yyyy-MM-dd")) \(UUID().uuidString)")
+    private let sasKeyQ = QueueLockModel<UserFileSASKeyQueueModel>("sasQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
+    private let azureQ = QueueLockModel<UserFileAzureQueueModel>("azureQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
+    private let resultQ = QueueLockModel<UserFileResultQueueModel>("resultQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
+    private let sasTrainingKeyQ = QueueLockModel<UserTrainingFileSASKeyQueueModel>("sasTrainingQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
+    private let azureTrainingQ = QueueLockModel<UserTrainingFileAzureQueueModel>("azureTrainingQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
+    private let resultTrainingQ = QueueLockModel<UserTrainingFileResultQueueModel>("resultTrainingQ \(FExtensions.ins.getToday().toString("yyyyMMdd_HHmmss")) \(UUID().uuidString)")
     
     private var resultQRun = false
     private var resultTrainingQRun = false

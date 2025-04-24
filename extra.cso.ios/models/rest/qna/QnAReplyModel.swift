@@ -15,7 +15,7 @@ class QnAReplyModel: FDataModelClass<QnAReplyModel.ClickEvent>, Codable {
     }
     @Published var currentPosition = 1
     var regDateString: String {
-        return FDateTime().setThis(regDate.timeIntervalSince1970).toString("yyyy-MM-dd")
+        return FDateTime().setThis(regDate.timeIntervalSince1970).toString()
     }
     
     func encode(to encoder: Encoder) throws {

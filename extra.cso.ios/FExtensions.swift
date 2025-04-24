@@ -49,7 +49,7 @@ class FExtensions {
 
 extension Date {
     var toString: String {
-        return FDateTime().setThis(self.timeIntervalSince1970).toString("yyyy-MM-dd")
+        return FDateTime().setThis(self.timeIntervalSince1970).toString()
     }
 }
 
