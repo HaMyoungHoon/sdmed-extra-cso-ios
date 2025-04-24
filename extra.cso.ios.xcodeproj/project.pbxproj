@@ -55,6 +55,13 @@
 			);
 			target = F003F8CB2DB5EBB6000989B1 /* CSOUploadWidgetExtension */;
 		};
+		F0178D802DBA2C7000A6B7D7 /* Exceptions for "extra.cso.ios" folder in "extra.cso.ios" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"extra-cso-ios-Info.plist",
+			);
+			target = F0C16A282D97C12F008B3297 /* extra.cso.ios */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -68,6 +75,9 @@
 		};
 		F0C16A2B2D97C12F008B3297 /* extra.cso.ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F0178D802DBA2C7000A6B7D7 /* Exceptions for "extra.cso.ios" folder in "extra.cso.ios" target */,
+			);
 			path = extra.cso.ios;
 			sourceTree = "<group>";
 		};
@@ -522,7 +532,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
+				INFOPLIST_FILE = "extra-cso-ios-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -574,7 +585,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "${app_name}";
+				INFOPLIST_FILE = "extra-cso-ios-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
