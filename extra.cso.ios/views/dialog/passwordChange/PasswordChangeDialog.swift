@@ -44,16 +44,27 @@ struct PasswordChangeDialog: FBaseView {
                     .overlay(RoundedRectangle(cornerRadius: 5)
                         .stroke(FAppColor.border, lineWidth: 1))
                     .padding(10)
+                    .onChange(of: dataContext.currentPW, initial: true) { old, new in
+                        dataContext.checkChange()
+                    }
                 SecureField("after_pw_desc", text: $dataContext.afterPW)
                     .textFieldStyle(.roundedBorder)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                         .stroke(FAppColor.border, lineWidth: 1))
                     .padding(10)
+                    .onChange(of: dataContext.currentPW, initial: true) { old, new in
+                        dataContext.afterPWRuleVisible = FExtensions.ins.regexPasswordCheck(new)
+                        dataContext.checkChange()
+                    }
                 SecureField("confirm_desc", text: $dataContext.confirmPW)
                     .textFieldStyle(.roundedBorder)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                         .stroke(FAppColor.border, lineWidth: 1))
                     .padding(10)
+                    .onChange(of: dataContext.currentPW, initial: true) { old, new in
+                        dataContext.confirmPWRuleVisible = FExtensions.ins.regexPasswordCheck(new)
+                        dataContext.checkChange()
+                    }
             }
             .padding(.top, 20)
         }

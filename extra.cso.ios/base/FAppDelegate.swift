@@ -1,11 +1,13 @@
 import Foundation
 import UserNotifications
 import SwiftUI
+import GoogleMaps
 
 class FAppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UNUserNotificationCenter.current().delegate = self
+        GMSServices.provideAPIKey(FConstants.GOOGLE_MAP_API_KEY)
         return true
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

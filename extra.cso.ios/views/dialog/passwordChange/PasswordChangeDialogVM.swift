@@ -15,6 +15,11 @@ class PasswordChangeDialogVM: FBaseViewModel {
         return ret
     }
     
+    func checkChange() {
+        pwUnMatchVisible = afterPW != confirmPW
+        changeAble = !pwUnMatchVisible && !afterPWRuleVisible && !confirmPWRuleVisible && currentPW.count > 3 && !afterPW.isEmpty && !confirmPW.isEmpty
+    }
+    
     enum ClickEvent: Int, CaseIterable {
         case CHANGE = 0
     }

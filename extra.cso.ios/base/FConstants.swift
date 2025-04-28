@@ -21,9 +21,14 @@ class FConstants {
     static let CLAIMS_EXP = "exp"
     static let CLAIMS_SUB = "sub"
     
+    static let GOOGLE_MAP_API_KEY = "AIzaSyAnYs_q-FijRYpdTVyjfW3sc6rw79D3xas"
+    static let GOOGLE_MAP_ID_1 = "bf2a0a2929a1816c"
+    static let GOOGLE_MAP_ID_2 = "3d02f5db0a24cb9"
+    static let GOOGLE_MAP_ID_3 = "848448b99f7f8b28"
+    
     static let DEF_LATITUDE = 37.6618
     static let DEF_LONGITUDE = 126.76905
-    static let DEF_ZOOM = 15.0
+    static let DEF_ZOOM: Float = 15.0
     
     static let MAX_FILE_SIZE = 10 * 1024 * 1024
     

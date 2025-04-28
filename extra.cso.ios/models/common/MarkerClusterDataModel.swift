@@ -14,14 +14,6 @@ class MarkerClusterDataModel: NSObject, GMUClusterItem {
     var position: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: FConstants.DEF_LATITUDE, longitude: FConstants.DEF_LONGITUDE)
     }
-//    var title: String {
-//        return orgName
-//    }
-//    var snippet: String? {
-//        if address.isEmpty {
-//            return nil
-//        }
-//
-//        return address
-//    }
+    var title: String?
+    var snippet: String?
 }

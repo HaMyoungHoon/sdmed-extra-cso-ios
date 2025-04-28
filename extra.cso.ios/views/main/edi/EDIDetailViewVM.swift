@@ -11,6 +11,7 @@ class EDIDetailViewVM: FBaseViewModel {
     @Published var hospitalTempDetail = false
     @Published var mediaView: EDIUploadPharmaFileModel? = nil
     @Published var mediaListView: EDIUploadPharmaFileModel? = nil
+    @Published var hospitalDetailVisible = false
     
     init(_ appState: FAppState, _ thisPK: String) {
         self.thisPK = thisPK

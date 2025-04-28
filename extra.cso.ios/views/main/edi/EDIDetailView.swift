@@ -49,6 +49,9 @@ struct EDIDetailView: FBaseView {
                     MediaPickerDialog(dataContext.appState, { dataContext.reSetImage(thisPK, $0) }, 0, dataContext.getMedia(thisPK))
                 }
             }
+            .fullScreenCover(isPresented: $dataContext.hospitalDetailVisible) {
+                HospitalTempDetailDialog(dataContext.appState, dataContext.item.tempHospitalPK)
+            }
     }
     var topContainer: some View {
         Group {
@@ -289,7 +292,8 @@ struct EDIDetailView: FBaseView {
         switch eventName {
         case EDIDetailViewVM.ClickEvent.CLOSE: close()
             break
-        case EDIDetailViewVM.ClickEvent.HOSPITAL_DETAIL: hospitalDetail()
+        case EDIDetailViewVM.ClickEvent.HOSPITAL_DETAIL:
+            hospitalDetail()
             break
         }
     }
@@ -361,7 +365,10 @@ struct EDIDetailView: FBaseView {
         dismiss()
     }
     func hospitalDetail() {
-        
+        if dataContext.item.tempHospitalPK.isEmpty {
+            return
+        }
+        dataContext.hospitalDetailVisible = true
     }
     func save(_ item: ExtraEDIPharma) {
         if item.isSavable == false { return }

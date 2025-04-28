@@ -45,6 +45,21 @@ class FExtensions {
             return String(format: "%02d:%02d", minutes, seconds)
         }
     }
+    
+    func regexNumberReplace(_ data: String?) -> String {
+        guard var data = data,
+              let regex = try? Regex(FConstants.REGEX_NUMBER_REPLACE) else {
+            return ""
+        }
+        return data.replace(regex, "")
+    }
+    func regexPasswordCheck(_ data: String?) -> Bool {
+        guard var data = data,
+              let regex = try? Regex(FConstants.REGEX_CHECK_PASSWORD_0) else {
+            return false
+        }
+        return data.wholeMatch(of: regex) != nil
+    }
 }
 
 extension Date {
@@ -92,6 +107,9 @@ extension String {
     }
     mutating func replace(_ old: String, _ new: String) -> String {
         return self.replacingOccurrences(of: old, with: new)
+    }
+    mutating func replace(_ regex: Regex<AnyRegexOutput>, _ new: String) -> String {
+        return self.replacing(regex, with: new)
     }
     var localized: String {
         return NSLocalizedString(self, comment: "")
